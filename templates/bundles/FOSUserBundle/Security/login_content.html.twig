@@ -1,0 +1,50 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% if error %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        {{ error.messageKey|trans(error.messageData, 'security') }}
+    </div>
+{% endif %}
+
+
+
+<div class="jumbotron">
+    <h2>Connexion</h2>
+    <form class="form-group" action="{{ path("fos_user_security_check") }}" method="post">
+        {% if csrf_token %}
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" >
+        {% endif %}
+
+        <div class="formulaireInput">
+            <label for="username">{{ 'security.login.username'|trans }}</label>
+            <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" required="required" autocomplete="username" >
+        </div>
+
+        <div class="formulaireInput">
+            <label for="password">{{ 'security.login.password'|trans }}</label>
+            <input type="password" class="form-control" id="password" name="_password" required="required" autocomplete="current-password" >
+        </div>
+
+        <div class="formulaireInput">
+            <label for="remember_me">
+                <input type="checkbox" id="remember_me" name="_remember_me" value="on" checked>
+                 {{ 'security.login.remember_me'|trans }}
+            </label>
+        </div>
+
+        <div class="formulaireInput">
+            <input type="submit" class="btn btn-lg btn-primary btn-block" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" >
+        </div>
+
+        <hr>
+        <div class="text-center">
+            <a href="{{ path('fos_user_resetting_request') }}" class="auteurListeArticle">Mot de passe oublié</a>
+        </div>
+        <div class="text-center">
+            <a href="{{ path('fos_user_registration_register') }}" class="auteurListeArticle">Pas de compte ? Je m'inscris ici</a>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,26 @@
+<div class="text-center adminAside">
+    <h2>Gestion</h2>
+    <hr>
+    <div class="admin">
+        <h5>modération</h5>
+        <a href="{{ path('app_admin_listeUsers') }}">Liste des utilisateurs</a>
+        <br>
+        <a href="{{ path('app_admin_listeComm') }}">Liste des commentaires</a>
+    </div>
+    <hr>
+    <div class="admin">
+        <h5>publication</h5>
+        {% if is_granted('ROLE_AUTEUR') %}
+        <a href="{{ path('app_admin_addArticle') }}">Ajouter un article</a>
+        <br>
+        {% endif %}
+        <a href="{{ path('app_admin_listeArticles') }}">Voir la liste des articles</a>
+    </div>
+    {% if is_granted('ROLE_ADMIN') %}
+    <hr>
+    <div class="admin">
+        <h5>administration</h5>
+        <a href="{{ path('app_admin_addUser') }}">Ajouter un utilisateur</a>
+    </div>
+    {% endif %}
+</div>

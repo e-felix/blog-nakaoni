@@ -1,0 +1,84 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Modifier un article
+{% endblock %}
+
+{% block main %}
+    <h2>Zone d'administration</h2>
+    <div class="jumbotron">
+        {% if is_granted('ROLE_AUTEUR') %}
+        <h5>Modification d'un article</h5>
+
+        {% for message in app.flashes('success') %}
+            <div class="alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        <div class="formulaireInput">
+            {{ form_label(form.titre) }}
+            {{ form_errors(form.titre, {'attr': {'class':'alert-warning'}}) }}
+            {{ form_widget(form.titre, {'attr': {'class':'form-control'}}) }}
+            {{ form_help(form.titre) }}
+        </div>
+
+        <div class="formulaireInput">
+            {{ form_label(form.accroche) }}
+            {{ form_errors(form.accroche, {'attr': {'class':'alert-warning'}}) }}
+            {{ form_widget(form.accroche, {'attr': {'class':'form-control'}}) }}
+            {{ form_help(form.accroche) }}
+        </div>
+
+        <div class="formulaireInput">
+            {{ form_label(form.texte) }}
+            {{ form_errors(form.texte, {'attr': {'class':'alert-warning'}}) }}
+            {{ form_widget(form.texte, {'attr': {'class':'form-control'}}) }}
+            {{ form_help(form.texte) }}
+        </div>
+
+        <div class="formulaireInput">
+            {{ form_label(form.categorie) }}
+            {{ form_errors(form.categorie, {'attr': {'class':'alert-warning'}}) }}
+            {{ form_widget(form.categorie, {'attr': {'class':'form-control'}}) }}
+            {{ form_help(form.categorie) }}
+        </div>
+
+        <div class="formulaireInput">
+            {{ form_label(form.imageFile) }}
+            {{ form_errors(form.imageFile, {'attr': {'class':'alert-warning'}}) }}
+            {{ form_widget(form.imageFile, {'attr': {'class':'form-control'}}) }}
+            {{ form_help(form.imageFile) }}
+        </div>
+
+        <div class="formulaireInput">
+            {{ form_label(form.youtube) }}
+            {{ form_errors(form.youtube, {'attr': {'class':'alert-warning'}}) }}
+            {{ form_widget(form.youtube, {'attr': {'class':'form-control'}}) }}
+            {{ form_help(form.youtube) }}
+        </div>
+
+        {% if isPublished == 1 %}
+            {% set checked = "checked" %}
+        {% else %}
+            {% set checked = "" %}
+        {% endif %}
+
+        <div class="formulaireInput form-check">
+            <input type="checkbox" id="articles_public"  name="isPublished" class="form-check-input" value="1" {{ checked }}>
+            <label for="articles_public">Public</label>
+        </div>
+
+        <div class="formulaireInput">
+            <input type="submit" class="btn btn-primary" value="Modifier">
+            <a class="btn btn-danger" href="{{ path('app_admin_removeArticle', {'id':article.id}) }}">Supprimer</a>
+        </div>
+        <a class="btn btn-outline-primary" href="{{ path('app_admin_listeUsers') }}"><- Retour à la liste des articles</a>
+        {{ form_end(form) }}
+        {% else %}
+            Accès refusé
+        {% endif %}
+    </div>
+{% endblock %}
+

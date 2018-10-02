@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container" style="min-height: 50vh">
+        <h6>Une erreur s'est produite : la page que vous demandez est introuvable !</h6>
+        <p>Voulez-vous retourner à l'<a href="{{ path('app_home_index') }}">accueil</a>  ?</p>
+    </div>
+{% endblock %}

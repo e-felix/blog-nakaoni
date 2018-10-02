@@ -1,0 +1,56 @@
+/* SMARTPHONE */
+@media screen and (max-width: 500px) {
+  .jumbotron {
+    padding: 0 !important;
+  }
+
+  .jumbotron th,
+  .jumbotron td {
+    word-wrap: break-word;
+    border-right: 1px solid #119b15;
+    padding: 0.4rem !important;
+  }
+}
+
+/* TABLETTE */
+@media screen and (max-width: 768px) {
+  aside {
+    border-top: 1px rgba(0, 0, 0, 0.1) solid;
+  }
+
+  #mpuTop,
+  #mpuBottom,
+  #fluxTwitter {
+    text-align: center;
+  }
+}
+
+/* ECRAN LARGE */
+@media screen and (min-width: 769px) and (max-width: 1170px) {
+  header {
+    text-align: center;
+  }
+  header .credentials .cacheText {
+    display: none;
+  }
+}
+
+/* ECRAN EXTRA LARGE */
+@media screen and (min-width: 1171px) {
+}
+
+/* BESOIN SPECIFIQUE */
+@media screen and (max-width: 569px) {
+  main .cacheExtraCol {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1064px) {
+}
+
+@media screen and (max-width: 875px) {
+  main .cacheCol {
+    display: none;
+  }
+}

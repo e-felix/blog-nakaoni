@@ -1,0 +1,69 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Ajout d'un article
+{% endblock %}
+
+{% block main %}
+    <h2>Zone d'administration</h2>
+    <div class="jumbotron">
+        {% if is_granted('ROLE_ADMIN') %}
+        <h5>Ajout d'un article</h5>
+        {{ form_start(createForm, {'attr': {'novalidate': 'novalidate'}}) }}
+            <div class="formulaireInput">
+                {{ form_label(createForm.titre) }}
+                {{ form_errors(createForm.titre, {'attr': {'class':'alert-warning'}}) }}
+                {{ form_widget(createForm.titre, {'attr': {'class':'form-control'}}) }}
+                {{ form_help(createForm.titre) }}
+            </div>
+
+            <div class="formulaireInput">
+                {{ form_label(createForm.accroche) }}
+                {{ form_errors(createForm.accroche, {'attr': {'class':'alert-warning'}}) }}
+                {{ form_widget(createForm.accroche, {'attr': {'class':'form-control'}}) }}
+                {{ form_help(createForm.accroche) }}
+            </div>
+
+            <div class="formulaireInput">
+                {{ form_label(createForm.texte) }}
+                {{ form_errors(createForm.texte, {'attr': {'class':'alert-warning'}}) }}
+                {{ form_widget(createForm.texte, {'attr': {'class':'form-control'}}) }}
+                {{ form_help(createForm.texte) }}
+            </div>
+
+            <div class="formulaireInput">
+                {{ form_label(createForm.categorie) }}
+                {{ form_errors(createForm.categorie, {'attr': {'class':'alert-warning'}}) }}
+                {{ form_widget(createForm.categorie, {'attr': {'class':'form-control'}}) }}
+                {{ form_help(createForm.categorie) }}
+            </div>
+
+            <div class="formulaireInput">
+                {{ form_label(createForm.imageFile) }}
+                {{ form_errors(createForm.imageFile, {'attr': {'class':'alert-warning'}}) }}
+                {{ form_widget(createForm.imageFile, {'attr': {'class':'form-control'}}) }}
+                {{ form_help(createForm.imageFile) }}
+            </div>
+
+            <div class="formulaireInput">
+                {{ form_label(createForm.youtube) }}
+                {{ form_errors(createForm.youtube, {'attr': {'class':'alert-warning'}}) }}
+                {{ form_widget(createForm.youtube, {'attr': {'class':'form-control'}}) }}
+                {{ form_help(createForm.youtube) }}
+            </div>
+
+            <div class="formulaireInput form-check">
+                <input type="checkbox" id="articles_public"  name="isPublished" class="form-check-input" value="1" checked>
+                <label for="articles_public">Public</label>
+            </div>
+
+            <div class="formulaireInput">
+                <input type="submit" class="btn btn-lg btn-primary btn-block" value="Ajouter" />
+            </div>
+        {{ form_end(createForm) }}
+        {% else %}
+            Accès refusé
+        {% endif %}
+    </div>
+{% endblock %}
+

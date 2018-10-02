@@ -1,0 +1,115 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Liste des utilisateurs
+{% endblock %}
+
+{% block main %}
+    <h2>Zone d'administration</h2>
+    <h5>Liste des utilisateurs</h5>
+
+    {% for message in app.flashes('success') %}
+        <div>
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <div class="jumbotron">
+        {% if is_granted('ROLE_ADMIN') %}
+            <a class="btn btn-sm btn-primary" href="{{ path('app_admin_addUser') }}">
+                <i class="fas fa-plus-circle"></i> Ajouter un utilisateur
+            </a>
+        {% endif %}
+        <table class="listeAdmin">
+            <thead>
+            <tr>
+                <th scope="col">Etat</th>
+                <th scope="col" class="cacheCol">Id</th>
+                <th scope="col">Pseudo</th>
+                <th scope="col">Email</th>
+                <th scope="col">Rôle</th>
+                <th scope="col" class="cacheCol">Dernière connexion</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+        {% for user in users %}
+            {% if is_granted('ROLE_ADMIN') %}
+                <tr>
+                    <td>
+                        <a href="{{ path('app_admin_statusUser', {'id' : user.id} ) }}">
+                        {% if user.isEnabled() %}
+                            <i class="fas fa-check-circle" style="color:green"></i>
+                        {% else %}
+                            <i class="fas fa-minus-circle" style="color:tomato"></i>
+                        {% endif %}
+                        </a>
+                    </td>
+                    <td class="cacheCol">{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.roles[0] | slice(5) }}</td>
+                    <td class="cacheCol">{{ user.lastLogin|date('d-m-Y') }}</td>
+                    <td>
+                        <a href="{{ path('app_admin_updateUser', {'id' : user.id }) }}">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                        <a href="{{ path('app_admin_removeUser', {'id' : user.id}) }}">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% elseif is_granted('ROLE_AUTEUR') and (user.hasRole('ROLE_MODERATEUR') or user.hasRole('ROLE_ABONNE')) %}
+                <tr>
+                    <td>
+                        <a href="{{ path('app_admin_statusUser', {'id' : user.id} ) }}">
+                        {% if user.isEnabled() %}
+                            <i class="fas fa-check-circle" style="color:green"></i>
+                        {% else %}
+                            <i class="fas fa-minus-circle" style="color:tomato"></i>
+                        {% endif %}
+                        </a>
+                    </td>
+                    <td class="cacheCol">{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.roles[0] | slice(5) }}</td>
+                    <td class="cacheCol">{{ user.lastLogin|date('d-m-Y') }}</td>
+                    <td>
+                        <a href="{{ path('app_admin_updateUser', {'id' : user.id }) }}">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% elseif is_granted('ROLE_MODERATEUR') and user.hasRole('ROLE_ABONNE') %}
+                <tr>
+                    <td>
+                        <a href="{{ path('app_admin_statusUser', {'id' : user.id} ) }}">
+                        {% if user.isEnabled() %}
+                            <i class="fas fa-check-circle" style="color:green"></i>
+                        {% else %}
+                            <i class="fas fa-minus-circle" style="color:tomato"></i>
+                        {% endif %}
+                        </a>
+                    </td>
+                    <td class="cacheCol">{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.roles[0] | slice(5) }}</td>
+                    <td class="cacheCol">{{ user.lastLogin|date('d-m-Y') }}</td>
+                    <td>
+                        <a href="{{ path('app_admin_updateUser', {'id' : user.id }) }}">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+        </table>
+
+        <!-- Pagination -->
+        <div class="navigation">
+            {{ knp_pagination_render(users) }}
+        </div>
+    </div>
+{% endblock %}
+

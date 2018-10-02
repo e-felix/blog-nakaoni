@@ -1,0 +1,13 @@
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    use_authentication_listener: true
+    user_class: App\Entity\Utilisateurs
+    service:
+        mailer: fos_user.mailer.twig_swift
+    from_email:
+        address: contact@nakaoni.com
+        sender_name: Contact
+    registration:
+        form:
+            type: App\Form\RegistrationType

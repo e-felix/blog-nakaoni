@@ -1,0 +1,119 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Liste des articles
+{% endblock %}
+
+{% block main %}
+    <h2>Zone d'administration</h2>
+    <h5>Liste des articles</h5>
+    <div class="jumbotron">
+        {% if is_granted('ROLE_ADMIN') %}
+            <a class="btn btn-sm btn-primary" href="{{ path('app_admin_addArticle') }}">
+                <i class="fas fa-plus-circle"></i> Ajouter un article
+            </a>
+        {% endif %}
+        <table class="listeAdmin">
+            <thead>
+            <tr>
+                <th scope="col">Etat</th>
+                <th scope="col">Id</th>
+                <th scope="col">Titre</th>
+                <th scope="col">Auteur</th>
+                <th scope="col">Catégorie</th>
+                <th scope="col" class="cacheCol">Nb Vues</th>
+                <th scope="col" class="cacheExtraCol">Créé le</th>
+                <th scope="col" class="cacheExtraCol">Modifié le</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            {% for article in articles %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('app_admin_statusArticle', {'id' : article.id}) }}">
+                                {% if article.public == 1 %}
+                                    <i class="fas fa-check-circle" style="color:green"></i>
+                                {% else %}
+                                    <i class="fas fa-minus-circle" style="color:tomato"></i>
+                                {% endif %}
+                            </a>
+                        </td>
+                        <td>{{ article.id }}</td>
+                        <td>{{ article.titre }}</td>
+                        <td>{{ article.auteur }}</td>
+                        <td>{{ article.categorie | upper }}</td>
+                        <td class="cacheCol">{{ article.nbViews }}</td>
+                        <td class="cacheExtraCol">{{ article.createdAt|date('d-m-Y') }}</td>
+                        <td class="cacheExtraCol">{{ article.updatedAt is empty ? "" : article.updatedAt|date('d-m-Y') }}</td>
+                        <td>
+                            <a href="{{ path('app_admin_updateArticle', {'id' : article.id}) }}">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="{{ path('app_admin_removeArticle', {'id': article.id}) }}">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% elseif is_granted('ROLE_AUTEUR') and article.auteur == user.username %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('app_admin_statusArticle', {'id' : article.id}) }}">
+                                {% if article.public == 1 %}
+                                    <i class="fas fa-check-circle" style="color:green"></i>
+                                {% else %}
+                                    <i class="fas fa-minus-circle" style="color:tomato"></i>
+                                {% endif %}
+                            </a>
+                        </td>
+                        <td>{{ article.id }}</td>
+                        <td>{{ article.titre }}</td>
+                        <td>{{ article.auteur }}</td>
+                        <td>{{ article.categorie | upper }}</td>
+                        <td class="cacheCol">{{ article.nbViews }}</td>
+                        <td class="cacheExtraCol">{{ article.createdAt|date('d-m-Y') }}</td>
+                        <td class="cacheExtraCol">{{ article.updatedAt|date('d-m-Y') }}</td>
+                        <td>
+                            <a href="{{ path('app_admin_updateArticle', {'id' : article.id}) }}">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="{{ path('app_admin_removeArticle', {'id': article.id}) }}">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% elseif is_granted('ROLE_MODERATEUR') %}
+                    <tr>
+                        <td>
+                            {% if article.public == 1 %}
+                                <i class="fas fa-check-circle" style="color:green"></i>
+                            {% else %}
+                                <i class="fas fa-minus-circle" style="color:tomato"></i>
+                            {% endif %}
+                        </td>
+                        <td>{{ article.id }}</td>
+                        <td>{{ article.titre }}</td>
+                        <td>{{ article.auteur }}</td>
+                        <td>{{ article.categorie | upper }}</td>
+                        <td class="cacheCol">{{ article.nbViews }}</td>
+                        <td class="cacheExtraCol">{{ article.createdAt|date('d-m-Y') }}</td>
+                        <td class="cacheExtraCol">{{ article.updatedAt|date('d-m-Y') }}</td>
+                        <td>
+                            <a href="{{ path('app_article', {'id' : article.id, 'categorie' : article.categorie }) }}">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+
+        <!-- Pagination -->
+        <div class="navigation">
+            {{ knp_pagination_render(articles) }}
+        </div>
+
+
+    </div>
+{% endblock %}
+

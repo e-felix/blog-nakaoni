@@ -1,0 +1,43 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Modifier un commentaire
+{% endblock %}
+
+{% block main %}
+    <h2>Zone d'administration</h2>
+    <div class="jumbotron">
+        <h5>Modification d'un commentaire</h5>
+
+        {% for message in app.flashes('success') %}
+            <div class="alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {{ form_start(form, {'attr': {'class':'ajoutCommentaires'}}) }}
+        <div class="formulaireInput">
+            {{ form_errors(form.texte, {'attr': {'class':'alert-warning'}}) }}
+            {{ form_widget(form.texte, {'attr': {'class':'form-control'}}) }}
+            {{ form_help(form.texte) }}
+        </div>
+
+        {% if isPublished == 1 %}
+            {% set checked = "checked" %}
+        {% else %}
+            {% set checked = "" %}
+        {% endif %}
+
+        <div class="formulaireInput form-check">
+            <input type="checkbox" id="commentaires_statut"  name="isPublished" class="form-check-input" value="1" {{ checked }}>
+            <label for="commentaires_statut">Public</label>
+        </div>
+
+        <div class="formulaireInput">
+            <input type="submit" class="btn btn-primary" value="Modifier">
+        </div>
+        <a class="btn btn-outline-primary" href="{{ path('app_admin_listeComm') }}"><- Retour à la liste des commentaires</a>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+

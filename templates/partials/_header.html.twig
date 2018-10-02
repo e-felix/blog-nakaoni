@@ -1,0 +1,70 @@
+<header>
+     <nav class="navbar navbar-expand-md fixed-top">
+        <a class="navbar-brand" href="{{ path('app_home_index') }}"><img class="img-fluid logo" src="{{ asset('images/graphics/logo-nakaoni-no-bg.png') }}" alt="Nakaoni" role="img"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('app_home_index') }}">
+                        {% if categorie is not defined %}
+                            <u class="current"><i class="fas fa-home"></i> <span class="cacheText">accueil</span></u>
+                        {% else %}
+                            <i class="fas fa-home"></i> <span class="cacheText">accueil</span>
+                        {% endif %}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_rubrique', {'categorie':'films'}) }}">
+                        {% if categorie is defined and categorie == 'films' %}
+                            <u class="current"><i class="fas fa-film"></i> <span class="cacheText">films</span></u>
+                        {% else %}
+                            <i class="fas fa-film"></i> <span class="cacheText">films</span>
+                        {% endif %}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_rubrique', {'categorie':'series'}) }}">
+                        {% if categorie is defined and categorie == 'series' %}
+                            <u class="current"><i class="fas fa-tv"></i> <span class="cacheText">séries</span></u>
+                        {% else %}
+                            <i class="fas fa-tv"></i> <span class="cacheText">séries</span>
+                        {% endif %}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_rubrique', {'categorie':'mangas'}) }}">
+                        {% if categorie is defined and categorie == 'mangas' %}
+                            <u class="current"><i class="fas fa-book"></i> <span class="cacheText">mangas</span></u>
+                        {% else %}
+                            <i class="fas fa-book"></i> <span class="cacheText">mangas</span>
+                        {% endif %}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_rubrique', {'categorie':'games'}) }}">
+
+                        {% if categorie is defined and categorie == 'games' %}
+                            <u class="current"><i class="fas fa-gamepad"></i> <span class="cacheText">games</span></u>
+                        {% else %}
+                            <i class="fas fa-gamepad"></i> <span class="cacheText">games</span>
+                        {% endif %}
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav navbar-right">
+                {% if app.user and is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    {% if app.user and is_granted('ROLE_MODERATEUR') %}
+                        <li><a class="credentials" href="{{ path('app_admin') }}"><span class="cacheText">Administration </span><i class="fas fa-cogs"></i></a></li>
+                    {% endif %}
+                <li><a class="credentials" href="{{ path('fos_user_profile_show') }}"><span class="cacheText">{{ app.user.username }} </span><i class="far fa-user"></i></a></li>
+                <li><a class="credentials" href="{{ path('fos_user_security_logout') }}"><span class="cacheText">Deconnexion </span><i class="fas fa-power-off"></i></a></li>
+                {% else %}
+                    <li><a class="credentials" href="{{ path('fos_user_security_login') }}"><span class="cacheText">Connexion </span><i class="fas fa-power-off"></i></a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <!-- FIN MENU -->
+</header>

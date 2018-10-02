@@ -1,0 +1,383 @@
+@import url("_mobile.css");
+@font-face {
+  font-family: "AG Book Rounded";
+  src: url("AGBookRounded-Bold.otf") format("opentype");
+}
+/*
+
+Code couleur :
+
+Titre: Vert - #119B15
+
+Texte: Gris foncé -  #565656
+
+Structure: Gris foncé - #565656 / Blanc -  #FFF
+
+
+
+Typo :
+
+Nakaoni + Titre : AGBookRounded Bold
+
+texte : verdana, sans serif
+
+*/
+
+/*-----------------------------------------
+
+Globale
+
+-----------------------------------------*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto;
+  background: #f4f4f4;
+  opacity: 0;
+  font-family: Verdana, sans-serif;
+}
+
+img {
+  max-width: 100%;
+}
+
+a,
+p {
+  text-decoration: none;
+  color: #565656;
+}
+
+a:hover {
+  color: #119b15;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #119b15;
+  text-transform: uppercase;
+  font-family: "AG Book Rounded", sans-serif;
+}
+
+section h1[class="card-title"],
+section h2[class="card-title"],
+section h3[class="card-title"],
+section h4[class="card-title"],
+section h5[class="card-title"],
+section h6[class="card-title"] {
+  display: inline-block;
+}
+
+header,
+.navbar,
+footer,
+.container {
+  background: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  max-width: 1000px;
+  margin: 95px auto 15px;
+  padding: 20px 10px;
+  border-radius: calc(0.25rem - 1px);
+}
+
+.card-img {
+  border: 1px #eaeaea solid;
+}
+
+.card-title {
+  margin-bottom: 0;
+}
+
+/*-----------------------------------------
+
+Mise en forme
+
+-----------------------------------------*/
+
+/*------ HEADER ---------*/
+
+.navbar {
+  min-height: 50px;
+  margin: 0;
+}
+
+.navbar .logo {
+  max-height: 50px;
+}
+
+.navbar ul {
+  margin: 0;
+}
+
+.navbar .nav-link {
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #565656;
+}
+
+.navbar .nav-link .current {
+  color: #119b15;
+  text-decoration: none;
+}
+
+.navbar .nav-link:hover {
+  color: #119b15;
+}
+
+.navbar .navbar-right .credentials {
+  font-size: 0.8rem;
+  margin-left: 15px;
+  font-weight: 500;
+  color: #565656;
+}
+
+.navbar .navbar-right .credentials:hover {
+  color: #119b15;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/*------ HEADER ---------*/
+
+/*------ DEBUT CONTENU PRINCIPAL ---------*/
+
+section.categorieMenu {
+  border-bottom: 1px solid #eaeaea;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+
+section.categorieMenu h4 a {
+  color: #119b15;
+}
+
+section .card a:hover {
+  text-decoration: none;
+}
+
+.lastArticle,
+.vignetteArticle {
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+}
+
+.lastArticle:hover,
+.vignetteArticle:hover {
+  color: #119b15;
+}
+
+section h4[class="card-title"],
+section h2[class="card-title"],
+section h5[class="card-title"],
+section p[class="card-text"] {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+section > a > h2:hover {
+  text-decoration: underline;
+}
+
+.lireSuite {
+  color: #119b15;
+  font-weight: bold;
+}
+
+.articleAccroche {
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.alert-success {
+  padding: 5px;
+  border-radius: 5px;
+}
+
+/*---- Article --*/
+article.card {
+  border: none;
+}
+
+.videoYoutube {
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.videoYoutube > iframe {
+  width: 100%;
+  min-height: 300px;
+}
+
+.commentaires {
+  font-size: 0.8rem;
+}
+
+.commentaires .headerCommentaires {
+  border-top: 1px #eaeaea solid;
+}
+
+.commentaires .headerCommentaires p {
+  color: #119b15;
+  margin-bottom: 0;
+}
+
+.commentaires .headerCommentaires span {
+  color: #565656;
+}
+
+.commentaires .bodyCommentaires {
+}
+
+.commentaires .ajoutCommentaires {
+  border-top: 1px #eaeaea solid;
+}
+
+.commentaires .btnSubmit {
+  font-size: 0.8rem;
+}
+
+.bodyCommentaires a.showComm {
+  color: #119b15;
+}
+
+.bodyCommentaires a.showComm:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.bodyCommentaires span.textComm {
+  display: none;
+}
+
+.headerCommentaires .badge-success,
+.headerCommentaires .badge-info {
+  color: #fff !important;
+}
+
+/*---- Pagination --*/
+
+a.page-link {
+  color: #119b15;
+}
+
+/*--- Connexion ---*/
+
+.jumbotron {
+  background: #fff;
+  margin: 20px auto;
+  max-width: 1000px;
+  padding: 1rem;
+}
+
+.formulaireInput {
+  margin: 10px 0;
+}
+
+.auteurListeArticle {
+  color: #119b15;
+}
+
+.auteurListeArticle:hover {
+  color: #119b15;
+}
+
+/*--- Admin --*/
+
+.listeAdmin {
+  border-collapse: collapse;
+  margin: 10px auto;
+}
+
+.listeAdmin th,
+.listeAdmin td {
+  padding: 0.5rem;
+  font-size: 0.8rem;
+  max-width: 230px;
+}
+
+.listeAdmin tr {
+  border: 1px #119b15 solid;
+}
+
+.listeAdmin th {
+  background: #c9c9c9;
+}
+
+/*------ FIN CONTENU PRINCIPAL ---------*/
+
+/*------ DEBUT CONTENU SECONDAIRE ---------*/
+aside {
+  border-left: 1px #eaeaea solid;
+}
+
+#fluxTwitter {
+  background: white;
+  border-radius: calc(0.25rem - 1px);
+  margin: 0 auto 10px;
+  padding: 5px 5px 5px 5px;
+}
+
+#mpuTop,
+#mpuBottom,
+#randomArticle,
+.adminAside {
+  background: white;
+  border-radius: calc(0.25rem - 1px);
+  margin: 0 auto 10px;
+  padding: 5px;
+}
+
+#randomArticle > article.card {
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+#randomArticle > article.card > a > .card-img-overlay {
+  opacity: 0;
+  text-decoration: none;
+}
+
+#randomArticle > article.card > a > .card-img-overlay {
+  text-decoration: none;
+}
+
+#randomArticle > article.card > a > .card-img-overlay:hover {
+  background: rgba(234, 234, 234, 0.7);
+  opacity: 1;
+}
+
+#randomArticle > article.card > a > .card-img-overlay > .card-text {
+  font-size: 12px;
+}
+
+/*------ FIN CONTENU SECONDAIRE ---------*/
+
+/*------ DEBUT FOOTER  ---------*/
+
+footer {
+  background: white;
+  padding-top: 25px;
+  margin-top: 4rem;
+}
+
+footer .copyright {
+  margin-top: 100px;
+  text-align: center;
+}
+
+/*------ FIN FOOTER ---------*/

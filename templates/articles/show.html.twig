@@ -1,0 +1,128 @@
+{% extends 'base.html.twig' %}
+
+{% block meta %}
+    {{ parent() }}
+    <meta name="keywords" content="critiques, avis, articles, nakaoni, {{ article.categorie }}, {{ article.titre }}">
+    <meta name="description" content="{{ article.titre }} : {{ article.accroche }}">
+{% endblock %}
+
+{% block title %}
+    {{ article.titre }}
+    -
+    {{ parent() }}
+{% endblock %}
+
+{% block main %}
+    <article class="article">
+        <h1>{{ article.titre | upper }}</h1>
+        <p class="articleInfos">Par
+            <a class="auteurListeArticle" href="{{ path('app_user', {'id':article.auteur.id, 'title':article.auteur.username | replace({' ' : '-'}) | lower }) }}">{{ article.auteur.username | capitalize }}</a>
+            | Publié le
+            {{ article.createdAt | date('d/m/Y') }}
+            |
+            {{ article.nbViews }}
+            vues</p>
+        <hr>
+        <img class="img-fluid rounded" src="{{ asset('images/articles/' ~ article.imageName) }}" alt="{{ article.titre }}">
+        <p class="articleAccroche">{{ article.accroche }}</p>
+        <p class="articleTexte">{{ article.texte | nl2br }}</p>
+        <hr>
+        {% if article.youtube %}
+            <h5>Video Youtube</h5>
+            <div class="videoYoutube">
+                <iframe src="https://www.youtube.com/embed/{{ article.youtube }}" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+            </div>
+            <hr>
+        {% endif %}
+        <div>
+            <h5>Commentaires</h5>
+            <div class="commentaires">
+
+                {% set admin = 'ROLE_ADMIN' %}
+                {% set auteur = 'ROLE_AUTEUR' %}
+                {% set moderateur = 'ROLE_MODERATEUR' %}
+
+                {# Affichage des commentaires #}
+                {% if commentaires | length > 0 %}
+                   {% for commentaire in commentaires %}
+                        {% if commentaire.statut == 1 %}
+                            <div class="headerCommentaires">
+                                {% if commentaire.utilisateurs.hasRole(admin) %}
+                                    <p>{{ commentaire.utilisateurs.username }} <span class="badge badge-success">Admin</span> <span>{{ commentaire.createdAt | date('d/m/Y') }}</span><p>
+                                {% elseif commentaire.utilisateurs.hasRole(auteur) %}
+                                    <p>{{ commentaire.utilisateurs.username }} <span class="badge badge-info">Auteur</span>  <span>{{ commentaire.createdAt | date('d/m/Y') }}</span><p>
+                                {% elseif commentaire.utilisateurs.hasRole(moderateur) %}
+                                    <p>{{ commentaire.utilisateurs.username }} <span class="badge badge-warning">Modérateur</span>  <span>{{ commentaire.createdAt | date('d/m/Y') }}</span><p>
+                                {% else %}
+                                    <p>{{ commentaire.utilisateurs.username }} <span>{{ commentaire.createdAt | date('d/m/Y') }}</span><p>
+                                {% endif %}
+                            </div>
+                            <div class="bodyCommentaires">
+                                {% set tab = commentaire.texte | split('\r\n', 2) %}
+                                {% if tab | length > 1 %}
+                                    <p>{{ tab[0] | nl2br }} <br>
+                                    <a class="showComm"> Voir la suite</a>
+                                    <span class="textComm">
+                                    {{ tab[1] | nl2br }}<span></p>
+                                {% else %}
+                                    <p>{{ commentaire.texte | nl2br }}</p>
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <div class="headerCommentaires">
+                                <p>{{ commentaire.utilisateurs.username }} <span>{{ commentaire.createdAt | date('d/m/Y') }}</span><p>
+                            </div>
+                            <div class="bodyCommentaires">
+                                <p class="font-italic font-weight-light">Commentaire supprimé après modération</p>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <div class="bodyCommentaires">
+                        <p>Il n'y a pas encore de commentaires, soyez le premier !</p>
+                    </div>
+                {% endif %}
+
+
+                {# Affichage du formulaire d'ajout d'un commentaire #}    
+                {% if app.user %}
+                    {{ form_start(form, {'attr': {'class':'ajoutCommentaires'}}) }}
+                    <div class="formulaireInput">
+                        {{ form_errors(form.texte, {'attr': {'class':'alert-warning'}}) }}
+                        {{ form_widget(form.texte, {'attr': {'class':'form-control'}}) }}
+                        {{ form_help(form.texte) }}
+                    </div>
+                    <div class="formulaireInput">
+                        <input type="submit" class="btn btn-lg btn-primary btnSubmit" value="Ajouter"/>
+                    </div>
+                    {{ form_end(form) }}
+                    {% else %}
+                    <div>
+                        <a href="{{ path("fos_user_security_login") }}" class="btn btn-primary btnSubmit">Je me connecte pour commenter</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </article>
+{% endblock %}
+
+    {% block aside %}
+        {% set tailleTexte = '75' %}
+        <!-- DEBUT RANDOM ARTICLE -->
+        <div id="randomArticle">
+            <h5>à voir aussi</h5>
+            {% for rndArticle in articlesBest %}
+                <article class="vignetteArticleAside card">
+                    <img class="card-img" src="{{ asset('images/articles/' ~ rndArticle.imageName) }}" alt="{{ rndArticle.titre }}">
+                    <a href="{{ path('app_article', {'categorie':articlesBest[0].categorie, 'id':rndArticle.id, 'title':rndArticle.titre | replace({' ' : '-'}) | lower }) }}">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title">{{ rndArticle.titre }}</h5>
+                            <p class="card-text">{{ rndArticle.accroche|slice(0, tailleTexte) }}...<span class="lireSuite">Lire la suite ></span></p>
+                        </div>
+                    </a>
+                </article>
+            {% endfor %}
+        </div>
+        <!-- FIN RANDOM ARTICLE -->
+        {{ parent() }}
+    {% endblock %}

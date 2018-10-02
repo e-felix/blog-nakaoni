@@ -1,0 +1,41 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="jumbotron">
+    <h2>Inscription</h2>
+
+    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+        {{ form_errors(form) }}
+
+        <div class="formulaireInput">
+            {{ form_label(form.username) }}
+            {{ form_errors(form.username, {'attr': {'class':'alert-warning'}}) }}
+            {{ form_widget(form.username, {'attr': {'class':'form-control'}}) }}
+            {{ form_help(form.username) }}
+        </div>
+
+        <div class="formulaireInput">
+            {{ form_label(form.email) }}
+            {{ form_errors(form.email, {'attr': {'class':'alert-warning'}}) }}
+            {{ form_widget(form.email, {'attr': {'class':'form-control'}}) }}
+            {{ form_help(form.email) }}
+        </div>
+
+        <div class="formulaireInput">
+            {{ form_label(form.plainPassword.first) }}
+            {{ form_errors(form.plainPassword.first, {'attr': {'class':'alert-warning'}}) }}
+            {{ form_widget(form.plainPassword.first, {'attr': {'class':'form-control'}}) }}
+            {{ form_help(form.plainPassword.first) }}
+        </div>
+
+        <div class="formulaireInput">
+            {{ form_label(form.plainPassword.second) }}
+            {{ form_errors(form.plainPassword.second, {'attr': {'class':'alert-warning'}}) }}
+            {{ form_widget(form.plainPassword.second, {'attr': {'class':'form-control'}}) }}
+            {{ form_help(form.plainPassword.second) }}
+        </div>
+
+        <div class="formulaireInput">
+            <input type="submit" class="btn btn-lg btn-primary btn-block" value="{{ 'registration.submit'|trans }}" />
+        </div>
+    {{ form_end(form) }}
+</div>

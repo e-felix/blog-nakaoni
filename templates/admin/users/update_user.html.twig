@@ -1,0 +1,60 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Modification d'un utilisateur
+{% endblock %}
+
+{% block main %}
+    <h2>Zone d'administration</h2>
+    <div class="jumbotron">
+        <h5>Modification d'un utilisateur</h5>
+
+        {% for message in app.flashes('success') %}
+            <div class="alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+            <div class="formulaireInput">
+                {{ form_label(form.username, 'Pseudo') }}
+                {{ form_errors(form.username, {'attr': {'class':'alert-warning'}}) }}
+                {{ form_widget(form.username, {'attr': {'class':'form-control'}}) }}
+                {{ form_help(form.username) }}
+            </div>
+
+            <div class="formulaireInput">
+                {{ form_label(form.email) }}
+                {{ form_errors(form.email, {'attr': {'class':'alert-warning'}}) }}
+                {{ form_widget(form.email, {'attr': {'class':'form-control'}}) }}
+                {{ form_help(form.email) }}
+            </div>
+
+            {% if is_granted('ROLE_AUTEUR') %}
+                <div class="formulaireInput">
+                    <label for="utilisateurs_roles_0" class="required">Rôle ({{ user.roles[0] }} actuellement)</label>
+                    <select class="form-control" id="utilisateurs_roles_0" name="roles" required="required">
+                        <option value="ROLE_ABONNE" {% if user.role('ROLE_ABONNE') %} selected="selected" {% endif %}>ROLE_ABONNE</option>
+                        <option value="ROLE_MODERATEUR" {% if user.role('ROLE_MODERATEUR') %} selected="selected" {% endif %}>ROLE_MODERATEUR</option>
+                        <option value="ROLE_AUTEUR" {% if user.role('ROLE_AUTEUR') %} selected="selected" {% endif %}>ROLE_AUTEUR</option>
+                        <option value="ROLE_ADMIN" {% if user.role('ROLE_ADMIN') %} selected="selected" {% endif %}>ROLE_ADMIN</option>
+                    </select>
+                </div>
+            {% endif %}
+
+            <div class="formulaireInput form-check">
+                {{ form_errors(form.enabled, {'attr': {'class':'alert-warning'}}) }}
+                {{ form_widget(form.enabled, {'attr': {'class':'form-check-input'}}) }}
+                {{ form_label(form.enabled, 'Actif') }}
+                {{ form_help(form.enabled) }}
+            </div>
+
+            <div class="formulaireInput">
+                <input type="submit" class="btn btn-primary" value="Modifier">
+                <a class="btn btn-danger" href="{{ path('app_admin_removeUser', {'id' : user.id }) }}">Supprimer</a>
+            </div>
+            <a class="btn btn-outline-primary" href="{{ path('app_admin_listeUsers') }}"><- Retour à la liste des utilisateurs</a>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+

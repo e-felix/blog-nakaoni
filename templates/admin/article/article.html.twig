@@ -1,0 +1,33 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - {{ article.titre }}
+{% endblock %}
+
+{% block main %}
+    <h2>Zone d'administration</h2>
+    <div class="jumbotron">
+        <div>
+            {{ article.titre | upper }}
+        </div>
+        <div>
+            <img src="{{ asset('images/articles/' ~ article.imageName) }}" alt="{{ article.imageName }}">
+        </div>
+        <div>
+            {{ article.accroche }}
+        </div>
+        <div>
+            {{ article.texte | nl2br }}
+        </div>
+        <div>
+            {{ article.categorie }}
+        </div>
+        <div>
+            {{ article.youtube }}
+        </div>
+        <div>
+            Public : {{ article.public }}
+        </div>
+    </div>
+{% endblock %}
+

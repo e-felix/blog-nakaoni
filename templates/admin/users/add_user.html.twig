@@ -1,0 +1,66 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Ajouter un utilisateur
+{% endblock %}
+
+{% block main %}
+    <h2>Zone d'administration</h2>
+    <div class="jumbotron">
+        {% if is_granted('ROLE_ADMIN') %}
+        <h5>Ajout d'un utilisateur</h5>
+
+        <p>
+            Note : le mot de passe est créé par défaut avec la valeur : Nak4on1 <br>
+            Merci de bien avertir l'utilisateur de modifier son mot de passe à la 1ère connexion
+        </p>
+
+        {% for message in app.flashes('success') %}
+            <div class="alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        <div class="formulaireInput">
+            {{ form_label(form.username, 'Pseudo') }}
+            {{ form_errors(form.username, {'attr': {'class':'alert-warning'}}) }}
+            {{ form_widget(form.username, {'attr': {'class':'form-control'}}) }}
+            {{ form_help(form.username) }}
+        </div>
+
+        <div class="formulaireInput">
+            {{ form_label(form.email) }}
+            {{ form_errors(form.email, {'attr': {'class':'alert-warning'}}) }}
+            {{ form_widget(form.email, {'attr': {'class':'form-control'}}) }}
+            {{ form_help(form.email) }}
+        </div>
+
+        <div class="formulaireInput">
+            <label for="utilisateurs_roles_0" class="required">Rôle (ROLE_ABONNE actuellement)</label>
+            <select class="form-control" id="utilisateurs_roles_0" name="roles" required="required">
+                <option value="ROLE_ABONNE">ROLE_ABONNE</option>
+                <option value=">ROLE_MODERATEUR">ROLE_MODERATEUR</option>
+                <option value="ROLE_AUTEUR">ROLE_AUTEUR</option>
+                <option value="ROLE_ADMIN">ROLE_ADMIN</option>
+            </select>
+        </div>
+
+        <div class="formulaireInput form-check">
+            {{ form_errors(form.enabled, {'attr': {'class':'alert-warning'}}) }}
+            {{ form_widget(form.enabled, {'attr': {'class':'form-check-input', 'checked':'checked'}}) }}
+            {{ form_label(form.enabled, 'Actif') }}
+            {{ form_help(form.enabled) }}
+        </div>
+
+        <div class="formulaireInput">
+            <input type="submit" class="btn btn-primary" value="Ajouter">
+        </div>
+        <a class="btn btn-outline-primary" href="{{ path('app_admin_listeUsers') }}"><- Retour à la liste des utilisateurs</a>
+        {{ form_end(form) }}
+        {% else %}
+            Accès refusé
+        {% endif %}
+    </div>
+{% endblock %}
+

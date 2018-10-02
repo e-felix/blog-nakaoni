@@ -1,0 +1,53 @@
+parameters:
+    # Adds a fallback DATABASE_URL if the env var is not set.
+    # This allows you to run cache:warmup even if your
+    # environment variables are not available yet.
+    # You should not need to change this value.
+    #env(DATABASE_URL): ''
+
+doctrine:
+    dbal:
+        # configure these for your database server
+        #driver: 'pdo_mysql'
+        #server_version: '5.6'
+        #charset: utf8mb4
+        #default_table_options:
+        #charset: utf8mb4
+        #collate: utf8mb4_unicode_ci
+        default_connection: default
+        connections:
+            default:
+                driver: 'pdo_mysql'
+                charset: utf8mb4
+                default_table_options:
+                    charset: utf8mb4
+                    collate: utf8mb4_unicode_ci
+                dbname:           blog
+                user:             doctrine-blog
+                password:         o14XCcp38Eq3MOSV
+                host:             127.0.0.1
+                server_version:   '5.6'
+            nakaoni:
+                driver: 'pdo_mysql'
+                charset: utf8mb4
+                default_table_options:
+                    charset: utf8mb4
+                    collate: utf8mb4_unicode_ci
+                dbname:           nakaonicdpadmin
+                user:             nakaonicdpadmin
+                password:         Raptors0308
+                host:             nakaonicdpadmin.mysql.db
+                server_version:   '5.6'
+        #url: 'mysql://doctrine-blog:o14XCcp38Eq3MOSV@127.0.0.1:3306/blog'
+
+    orm:
+        auto_generate_proxy_classes: '%kernel.debug%'
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+        mappings:
+            App:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/src/Entity'
+                prefix: 'App\Entity'
+                alias: App

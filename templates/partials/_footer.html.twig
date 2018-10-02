@@ -1,0 +1,54 @@
+<!-- DEBUT FOOTER -->
+<footer>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <nav class="nav flex-column">
+                    <h5>Plan du site</h5>
+                    <a class="nav-link" href="{{ path('app_home_index') }}">
+                        <i class="fas fa-home"></i> {{ 'accueil' | upper }}
+                    </a>
+                    <a class="nav-link" href="{{ path('app_rubrique', {'categorie':'films'}) }}">
+                        <i class="fas fa-film"></i> {{ 'films' | upper }}
+                    </a>
+                    <a class="nav-link" href="{{ path('app_rubrique', {'categorie':'series'}) }}">
+                        <i class="fas fa-tv"></i> {{ 'séries' | upper }}
+                    </a>
+                    <a class="nav-link" href="{{ path('app_rubrique', {'categorie':'mangas'}) }}">
+                        <i class="fas fa-book"></i> {{ 'mangas' | upper }}
+                    </a>
+                    <a class="nav-link" href="{{ path('app_rubrique', {'categorie':'games'}) }}">
+                        <i class="fas fa-gamepad"></i> {{ 'games' | upper }}
+                    </a>
+                </nav>
+            </div>
+            <div class="col-md-6">
+                <nav class="nav flex-column">
+                    <h5>à propos</h5>
+                    <a class="nav-link" href="{{ path('mentions_legales') }}">Mentions légales</a>
+                    <p class="nav-link">Pour toutes questions, vous pouvez me contacter sur cette email : <a href="mailto:contact@nakaoni.com">contact@nakaoni.com</a></p>
+                </nav>
+            </div>
+            <div class="col-md-3">
+                <nav class="nav flex-column">
+                    <h5>Suivez-moi sur</h5>
+                    <a class="nav-link" href="https://twitter.com/nakaoni" target="_blank">
+                        <i class="fab fa-twitter"></i> {{ 'Twitter' | upper }}
+                    </a>
+                    <a class="nav-link" href="https://www.youtube.com/user/chotenro" target="_blank">
+                        <i class="fab fa-youtube"></i> {{ 'Youtube' | upper }}
+                    </a>
+                    <a class="nav-link" href="https://www.twitch.tv/nakaoni" target="_blank">
+                        <i class="fab fa-twitch"></i> {{ 'Twitch' | upper }}
+                    </a>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p class="copyright">Copyright&COPY; 2018 Nakaoni - Développé par <a href="https://www.erwinfelix.fr" target="_blank">Erwin Félix</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- FIN FOOTER -->

@@ -1,0 +1,56 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Liste des commentaires
+{% endblock %}
+
+{% block main %}
+    <h2>Zone d'administration</h2>
+    <h5>Liste des commentaires</h5>
+    <div class="jumbotron">
+        <table class="listeAdmin">
+            <thead>
+            <tr>
+                <th scope="col">Etat</th>
+                <th scope="col">Id</th>
+                <th scope="col">Id Article</th>
+                <th scope="col">Auteur</th>
+                <th scope="col">Texte</th>
+                <th scope="col" class="cacheCol">Créé le</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            {% for commentaire in commentaires %}
+            <tr>
+                <td>
+                    <a href="{{ path('app_admin_statusComm', {'id' : commentaire.id}) }}">
+                        {% if commentaire.statut == 1 %}
+                            <i class="fas fa-check-circle" style="color:green"></i>
+                        {% else %}
+                            <i class="fas fa-minus-circle" style="color:tomato"></i>
+                        {% endif %}
+                    </a>
+                </td>
+                <td>{{ commentaire.id }}</td>
+                <td>{{ commentaire.articles.id }}</td>
+                <td>{{ commentaire.utilisateurs.username }}</td>
+                <td>{{ commentaire.texte }}</td>
+                <td class="cacheCol">{{ commentaire.createdAt|date('d-m-Y') }}</td>
+                <td>
+                    <a href="{{ path('app_admin_updateComm', {'id' : commentaire.id}) }}">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <!-- Pagination -->
+        <div class="navigation">
+            {{ knp_pagination_render(commentaires) }}
+        </div>
+
+
+    </div>
+{% endblock %}
+

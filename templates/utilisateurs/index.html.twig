@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block meta %}
+    {{ parent() }}
+    <meta name="keywords" content="critiques, avis, articles, blog nakaoni, {{ paginationArticles[0].auteur.username }}">
+    <meta name="description" content="Retrouvez toutes les articles de {{ paginationArticles[0].auteur.username }}">
+{% endblock %}
+
+{% block title %}
+   Tous les articles de {{ paginationArticles[0].auteur.username }} - {{ parent() }}
+{% endblock %}
+
+{% block main %}
+    {% set tailleTexte = '150' %}
+
+    <!-- DEBUT SECTION CONTENU PRINCIPAL -->
+        <section class="sectionRubrique">
+            <h1>Tous les articles de {{ paginationArticles[0].auteur.username }}</h1>
+            <hr>
+            {% for article in paginationArticles %}
+                <article class="card">
+                    <a href="{{ path('app_rubrique', {'categorie':article.categorie}) }}" class="card-link btn btn-dark auteurListeArticleLien">
+                        {{ article.categorie|upper }}
+                    </a>
+                    <a href="{{ path('app_article', {'categorie':article.categorie, 'id':article.id, 'title':article.titre | replace({' ' : '-'}) | lower }) }}">
+                        <img class="card-img" src="{{ asset('images/articles/' ~ article.imageName) }}" alt="{{ article.titre }}">
+                        <h5 class="card-title">{{ article.titre }}</h5>
+                        <p class="card-text">{{ article.accroche | slice(0, tailleTexte) }}...<span class="lireSuite">Lire la suite</span></p>
+                    </a>
+                </article>
+                <hr>
+            {% endfor %}
+        </section>
+
+        <!-- Pagination -->
+        <div class="navigation">
+            {{ knp_pagination_render(paginationArticles) }}
+        </div>
+    <!-- FIN SECTION CONTENU PRINCIPAL -->
+{% endblock %}
+{% block aside %}
+    {% set tailleTexte = '75' %}
+
+    <!-- DEBUT RANDOM ARTICLE -->
+    <div id="randomArticle">
+        <h5>à voir aussi</h5>
+        {% for rndArticle in userArticlesBest %}
+            <article class="vignetteArticleAside card">
+                <img class="card-img" src="{{ asset('images/articles/' ~ rndArticle.imageName) }}" alt="{{ rndArticle.titre }}">
+                <a href="{{ path('app_article', {'categorie':rndArticle.categorie, 'id':rndArticle.id, 'title':rndArticle.titre | replace({' ' : '-'}) | lower }) }}">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">{{ rndArticle.titre }}</h5>
+                        <p class="card-text">{{ rndArticle.accroche|slice(0, tailleTexte) }}...<span class="lireSuite">Lire la suite ></span></p>
+                    </div>
+                </a>
+            </article>
+        {% endfor %}
+    </div>
+    <!-- FIN RANDOM ARTICLE -->
+    {{ parent() }}
+{% endblock %}

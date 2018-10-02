@@ -1,0 +1,34 @@
+App\Entity\Utilisateurs:
+  properties:
+    username:
+      - NotBlank: ~
+      - Length:
+          min: 3
+          max: 25
+          minMessage: "Le pseudo doit faire au minimum {{ limit }} lettres"
+          maxMessage: "Le pseudo doit faire au maximum {{ limit }} lettres"
+    email:
+      - NotBlank: ~
+      - Email:
+          mode: html5
+          checkMX: true
+          message: "Email {{ value }} non valide"
+App\Entity\Articles:
+  properties:
+    titre:
+      - NotBlank: ~
+      - Length:
+          min: 3
+          max: 75
+          minMessage: "Le titre doit faire au minimum {{ limit }} lettres"
+          maxMessage: "Le titre doit faire au maximum {{ limit }} lettres"
+    accroche:
+      - NotBlank: ~
+    texte:
+      - NotBlank: ~
+    categorie:
+      - NotNull: ~
+    imageFile:
+      - Image:
+          mimeTypes: image/*
+          mimeTypesMessage: "Le fichier envoyé n'est pas une image"

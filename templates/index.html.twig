@@ -1,0 +1,193 @@
+{% extends 'base.html.twig' %}
+
+{% block meta %}
+    {{ parent() }}
+    <meta name="keywords" content="critiques, avis, articles, films, series, jeux video, mangas, manwha, blog, nakaoni">
+    <meta name="description" content="Le Blog Nakaoni vous propose des avis, des critiques et des informations sur des films, des series, des jeux video et des mangas">
+{% endblock %}
+
+{% block main %}
+    {% set tailleTexte = '150' %}
+    <!-- DEBUT SECTION CONTENU PRINCIPAL -->
+    {# ------------FILMS------------ #}
+    <section class="categorieMenu">
+        <a href="{{ path('app_rubrique', {'categorie':'films'}) }}"><h2><i class="fas fa-film"></i> {{ films[0].categorie|upper }}</h2></a>
+        <article class="lastArticle card">
+            <a href="{{ path('app_article', {'categorie':films[0].categorie, 'id':films[0].id, 'title':films[0].titre | replace({' ' : '-'}) | lower }) }}">
+                <img class="card-img" src="{{ asset('images/articles/' ~ films[0].imageName) }}" alt="{{ films[0].titre }}">
+                <h4 class="card-title">{{ films[0].titre }}</h4>
+                <p class="card-text">
+                    {{ films[0].accroche|slice(0, tailleTexte) }}...<span class="lireSuite">Lire la suite ></span>
+                </p>
+            </a>
+        </article>
+
+        <div class="row">
+            <div class="col-md-6">
+                <article class="vignetteArticle card">
+                    <a href="{{ path('app_article', {'categorie':films[1].categorie, 'id':films[1].id, 'title':films[1].titre | replace({' ' : '-'}) | lower }) }}">
+                        <img class="card-img" src="{{ asset('images/articles/' ~ films[1].imageName) }}" alt="{{ films[1].titre }}">
+                        <h4 class="card-title">{{ films[1].titre }}</h4>
+                        <p class="card-text">
+                            {{ films[1].accroche|slice(0, tailleTexte) }}...<span class="lireSuite">Lire la suite ></span>
+                        </p>
+                    </a>
+                </article>
+            </div>
+
+            <div class="col-md-6">
+                <article class="vignetteArticle card">
+                    <a href="{{ path('app_article', {'categorie':films[2].categorie, 'id':films[2].id, 'title':films[1].titre | replace({' ' : '-'}) | lower }) }}">
+                        <img class="card-img" src="{{ asset('images/articles/' ~ films[2].imageName) }}" alt="{{ films[2].titre }}">
+                        <h4 class="card-title">{{ films[2].titre }}</h4>
+                        <p class="card-text">
+                            {{ films[2].accroche|slice(0, tailleTexte) }}...<span class="lireSuite">Lire la suite ></span>
+                        </p>
+                    </a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    {# ------------SERIES------------ #}
+    <section class="categorieMenu">
+        <a href="{{ path('app_rubrique', {'categorie':'series'}) }}"><h2><i class="fas fa-tv"></i> {{ series[0].categorie|upper }}</h2></a>
+        <article class="lastArticle card">
+            <a href="{{ path('app_article', {'categorie':series[0].categorie, 'id':series[0].id, 'title':series[0].titre | replace({' ' : '-'}) | lower }) }}">
+                <img class="card-img" src="{{ asset('images/articles/' ~ series[0].imageName) }}" alt="{{ series[0].titre }}">
+                <h4 class="card-title">{{ series[0].titre }}</h4>
+                <p class="card-text">
+                    {{ series[0].accroche|slice(0, tailleTexte) }}...<span class="lireSuite">Lire la suite ></span>
+                </p>
+            </a>
+        </article>
+
+        <div class="row">
+            <div class="col-md-6">
+                <article class="vignetteArticle card">
+                    <a href="{{ path('app_article', {'categorie':series[1].categorie, 'id':series[1].id, 'title':series[1].titre | replace({' ' : '-'}) | lower }) }}">
+                        <img class="card-img" src="{{ asset('images/articles/' ~ series[1].imageName) }}" alt="{{ series[1].titre }}">
+                        <h4 class="card-title">{{ series[1].titre }}</h4>
+                        <p class="card-text">
+                            {{ series[1].accroche|slice(0, tailleTexte) }}...<span class="lireSuite">Lire la suite ></span>
+                        </p>
+                    </a>
+                </article>
+            </div>
+
+            <div class="col-md-6">
+                <article class="vignetteArticle card">
+                    <a href="{{ path('app_article', {'categorie':series[2].categorie, 'id':series[2].id, 'title':series[2].titre | replace({' ' : '-'}) | lower }) }}">
+                        <img class="card-img" src="{{ asset('images/articles/' ~ series[2].imageName) }}" alt="{{ series[2].titre }}">
+                        <h4 class="card-title">{{ series[2].titre }}</h4>
+                        <p class="card-text">
+                            {{ series[2].accroche|slice(0, tailleTexte) }}...<span class="lireSuite">Lire la suite ></span>
+                        </p>
+                    </a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    {# ------------MANGAS------------ #}
+    <section class="categorieMenu">
+        <a href="{{ path('app_rubrique', {'categorie':'mangas'}) }}"><h2><i class="fas fa-book"></i> {{ mangas[0].categorie|upper }}</h2></a>
+        <article class="lastArticle card">
+            <a href="{{ path('app_article', {'categorie':mangas[0].categorie, 'id':mangas[0].id, 'title':mangas[0].titre | replace({' ' : '-'}) | lower }) }}">
+                <img class="card-img" src="{{ asset('images/articles/' ~ mangas[0].imageName) }}" alt="{{ mangas[0].titre }}">
+                <h4 class="card-title">{{ mangas[0].titre }}</h4>
+                <p class="card-text">
+                    {{ mangas[0].accroche|slice(0, tailleTexte) }}...<span class="lireSuite">Lire la suite ></span>
+                </p>
+            </a>
+        </article>
+
+        <div class="row">
+            <div class="col-md-6">
+                <article class="vignetteArticle card">
+                    <a href="{{ path('app_article', {'categorie':mangas[1].categorie, 'id':mangas[1].id, 'title':mangas[1].titre | replace({' ' : '-'}) | lower }) }}">
+                        <img class="card-img" src="{{ asset('images/articles/' ~ mangas[1].imageName) }}" alt="{{ mangas[1].titre }}">
+                        <h4 class="card-title">{{ mangas[1].titre }}</h4>
+                        <p class="card-text">
+                            {{ mangas[1].accroche|slice(0, tailleTexte) }}...<span class="lireSuite">Lire la suite ></span>
+                        </p>
+                    </a>
+                </article>
+            </div>
+
+            <div class="col-md-6">
+                <article class="vignetteArticle card">
+                    <a href="{{ path('app_article', {'categorie':mangas[2].categorie, 'id':mangas[2].id, 'title':mangas[2].titre | replace({' ' : '-'}) | lower }) }}">
+                        <img class="card-img" src="{{ asset('images/articles/' ~ mangas[2].imageName) }}" alt="{{ mangas[2].titre }}">
+                        <h4 class="card-title">{{ mangas[2].titre }}</h4>
+                        <p class="card-text">
+                            {{ mangas[2].accroche|slice(0, tailleTexte) }}...<span class="lireSuite">Lire la suite ></span>
+                        </p>
+                    </a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    {# ------------JEUX VIDEO------------ #}
+    <section class="categorieMenu">
+        <a href="{{ path('app_rubrique', {'categorie':'jeux'}) }}"><h2><i class="fas fa-gamepad"></i> {{ jeux[0].categorie|upper }}</h2></a>
+        <article class="lastArticle card">
+            <a href="{{ path('app_article', {'categorie':jeux[0].categorie, 'id':jeux[0].id, 'title':jeux[0].titre | replace({' ' : '-'}) | lower }) }}">
+                <img class="card-img" src="{{ asset('images/articles/' ~ jeux[0].imageName) }}" alt="{{ jeux[0].titre }}">
+                <h4 class="card-title">{{ jeux[0].titre }}</h4>
+                <p class="card-text">
+                    {{ jeux[0].accroche|slice(0, tailleTexte) }}...<span class="lireSuite">Lire la suite ></span>
+                </p>
+            </a>
+        </article>
+
+        <div class="row">
+            <div class="col-md-6">
+                <article class="vignetteArticle card">
+                    <a href="{{ path('app_article', {'categorie':jeux[1].categorie, 'id':jeux[1].id, 'title':jeux[1].titre | replace({' ' : '-'}) | lower }) }}">
+                        <img class="card-img" src="{{ asset('images/articles/' ~ jeux[1].imageName) }}" alt="{{ jeux[1].titre }}">
+                        <h4 class="card-title">{{ jeux[1].titre }}</h4>
+                        <p class="card-text">
+                            {{ jeux[1].accroche|slice(0, tailleTexte) }}...<span class="lireSuite">Lire la suite ></span>
+                        </p>
+                    </a>
+                </article>
+            </div>
+
+            <div class="col-md-6">
+                <article class="vignetteArticle card">
+                    <a href="{{ path('app_article', {'categorie':jeux[2].categorie, 'id':jeux[2].id, 'title':jeux[2].titre | replace({' ' : '-'}) | lower }) }}">
+                        <img class="card-img" src="{{ asset('images/articles/' ~ jeux[2].imageName) }}" alt="{{ jeux[2].titre }}">
+                        <h4 class="card-title">{{ jeux[2].titre }}</h4>
+                        <p class="card-text">
+                            {{ jeux[2].accroche|slice(0, tailleTexte) }}...<span class="lireSuite">Lire la suite ></span>
+                        </p>
+                    </a>
+                </article>
+            </div>
+        </div>
+    </section>
+    <!-- FIN SECTION CONTENU PRINCIPAL -->
+
+{% endblock %}
+{% block aside %}
+    {% set tailleTexte = '75' %}
+    <!-- DEBUT RANDOM ARTICLE -->
+    <div id="randomArticle">
+        <h5>à voir aussi</h5>
+        {% for rndArticle in rndArticles %}
+        <article class="vignetteArticleAside card">
+            <img class="card-img" src="{{ asset('images/articles/' ~ rndArticle.imageName) }}" alt="{{ rndArticle.titre }}">
+            <a href="{{ path('app_article', {'categorie':rndArticle.categorie, 'id':rndArticle.id, 'title':rndArticle.titre | replace({' ' : '-'}) | lower }) }}">
+                <div class="card-img-overlay">
+                    <h5 class="card-title">{{ rndArticle.titre }}</h5>
+                    <p class="card-text">{{ rndArticle.accroche|slice(0, tailleTexte) }}...<span class="lireSuite">Lire la suite ></span></p>
+                </div>
+            </a>
+        </article>
+        {% endfor %}
+    </div>
+    <!-- FIN RANDOM ARTICLE -->
+    {{ parent() }}
+{% endblock %}
