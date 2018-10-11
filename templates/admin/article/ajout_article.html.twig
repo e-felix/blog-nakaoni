@@ -7,7 +7,7 @@
 {% block main %}
     <h2>Zone d'administration</h2>
     <div class="jumbotron">
-        {% if is_granted('ROLE_ADMIN') %}
+        {% if is_granted('ROLE_AUTEUR') %}
         <h5>Ajout d'un article</h5>
         {{ form_start(createForm, {'attr': {'novalidate': 'novalidate'}}) }}
             <div class="formulaireInput">

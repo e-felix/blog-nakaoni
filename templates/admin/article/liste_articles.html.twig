@@ -99,7 +99,7 @@
                         <td class="cacheExtraCol">{{ article.createdAt|date('d-m-Y') }}</td>
                         <td class="cacheExtraCol">{{ article.updatedAt|date('d-m-Y') }}</td>
                         <td>
-                            <a href="{{ path('app_article', {'id' : article.id, 'categorie' : article.categorie }) }}">
+                            <a href="{{ path('app_article', {'id' : article.id, 'categorie' : article.categorie, 'title' : article.titre }) }}">
                                 <i class="fas fa-eye"></i>
                             </a>
                         </td>

@@ -36,8 +36,10 @@
                     <select class="form-control" id="utilisateurs_roles_0" name="roles" required="required">
                         <option value="ROLE_ABONNE" {% if user.role('ROLE_ABONNE') %} selected="selected" {% endif %}>ROLE_ABONNE</option>
                         <option value="ROLE_MODERATEUR" {% if user.role('ROLE_MODERATEUR') %} selected="selected" {% endif %}>ROLE_MODERATEUR</option>
-                        <option value="ROLE_AUTEUR" {% if user.role('ROLE_AUTEUR') %} selected="selected" {% endif %}>ROLE_AUTEUR</option>
-                        <option value="ROLE_ADMIN" {% if user.role('ROLE_ADMIN') %} selected="selected" {% endif %}>ROLE_ADMIN</option>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <option value="ROLE_AUTEUR" {% if user.role('ROLE_AUTEUR') %} selected="selected" {% endif %}>ROLE_AUTEUR</option>
+                            <option value="ROLE_ADMIN" {% if user.role('ROLE_ADMIN') %} selected="selected" {% endif %}>ROLE_ADMIN</option>
+                        {% endif %}
                     </select>
                 </div>
             {% endif %}
@@ -51,7 +53,9 @@
 
             <div class="formulaireInput">
                 <input type="submit" class="btn btn-primary" value="Modifier">
-                <a class="btn btn-danger" href="{{ path('app_admin_removeUser', {'id' : user.id }) }}">Supprimer</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a class="btn btn-danger" href="{{ path('app_admin_removeUser', {'id' : user.id }) }}">Supprimer</a>
+                {% endif %}
             </div>
             <a class="btn btn-outline-primary" href="{{ path('app_admin_listeUsers') }}"><- Retour à la liste des utilisateurs</a>
         {{ form_end(form) }}

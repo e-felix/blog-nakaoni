@@ -35,6 +35,9 @@
 
         <div class="formulaireInput">
             <input type="submit" class="btn btn-primary" value="Modifier">
+            {% if is_granted('ROLE_ADMIN') %}
+                    <a class="btn btn-danger" href="{{ path('app_admin_removeComm', {'id' : comm.id }) }}">Supprimer</a>
+                {% endif %}
         </div>
         <a class="btn btn-outline-primary" href="{{ path('app_admin_listeComm') }}"><- Retour à la liste des commentaires</a>
         {{ form_end(form) }}

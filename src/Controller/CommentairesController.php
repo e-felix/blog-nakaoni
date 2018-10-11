@@ -81,7 +81,8 @@ class CommentairesController extends Controller
 
         return $this->render('admin/commentaires/update_commentaires.html.twig', [
             'form' => $form->createView(),
-            'isPublished' => $isPublished
+            'isPublished' => $isPublished,
+            'comm' => $comm
         ]);
     }
 
@@ -105,4 +106,19 @@ class CommentairesController extends Controller
         return $this->redirectToRoute("app_admin_listeComm");
     }
 
+    /**
+     * @Route("/admin/commentaires/remove/{id}", name="app_admin_removeComm", requirements={"id":"\d+"})
+     * @param Commentaires $comm
+     * @return Response
+     */
+    public function removeUser(Commentaires $comm): Response
+    {
+        $manager = $this->getDoctrine()->getManager();
+        $manager->remove($comm);
+        $manager->flush();
+
+        $this->addFlash('success', 'Le commentaire a bien été supprimé');
+
+        return $this->redirectToRoute('app_admin_listeComm');
+    }
 }
