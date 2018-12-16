@@ -12,6 +12,7 @@ use App\Entity\Articles;
 use App\Entity\Utilisateurs;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\File\File;
 
 const TEST_IMAGE_PATH = 'public/images/articles/monimage.jpg';
 
@@ -26,6 +27,8 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $categorie = ['films', 'series', 'mangas', 'games'];
+
+        $image = new File(TEST_IMAGE_PATH);
 
         $date = new \DateTime('2018-06-26');
 
@@ -58,6 +61,9 @@ class AppFixtures extends Fixture
             $article->setCommentEnabled(1);
             $article->setCreatedAt($date);
             $article->setYoutube('OdKCzhU7kQI');
+            $article->setImageFile($image);
+            $article->setImageName('monimage.jpg');
+            $article->setImageSize(79991);
             $manager->persist($article);
         }
 
@@ -84,6 +90,9 @@ class AppFixtures extends Fixture
             $article->setCommentEnabled(1);
             $article->setCreatedAt($date);
             $article->setYoutube('OdKCzhU7kQI');
+            $article->setImageFile($image);
+            $article->setImageName('monimage.jpg');
+            $article->setImageSize(79991);
             $manager->persist($article);
         }
 
@@ -110,6 +119,9 @@ class AppFixtures extends Fixture
             $article->setCommentEnabled(1);
             $article->setCreatedAt($date);
             $article->setYoutube('OdKCzhU7kQI');
+            $article->setImageFile($image);
+            $article->setImageName('monimage.jpg');
+            $article->setImageSize(79991);
             $manager->persist($article);
         }
 
@@ -137,6 +149,9 @@ class AppFixtures extends Fixture
             $article->setCommentEnabled(1);
             $article->setCreatedAt($date);
             $article->setYoutube('OdKCzhU7kQI');
+            $article->setImageFile($image);
+            $article->setImageName('monimage.jpg');
+            $article->setImageSize(79991);
             $manager->persist($article);
         }
 
