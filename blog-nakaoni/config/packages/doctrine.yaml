@@ -14,7 +14,7 @@ doctrine:
         #default_table_options:
         #charset: utf8mb4
         #collate: utf8mb4_unicode_ci
-        default_connection: default
+        default_connection: mysql
         connections:
             default:
                 driver: 'pdo_mysql'
@@ -26,7 +26,7 @@ doctrine:
                 user:             doctrine-blog
                 password:         o14XCcp38Eq3MOSV
                 host:             127.0.0.1
-                server_version:   '5.6'
+                server_version:   5.6
             nakaoni:
                 driver: 'pdo_mysql'
                 charset: utf8mb4
@@ -38,6 +38,24 @@ doctrine:
                 password:         Raptors0308
                 host:             nakaonicdpadmin.mysql.db
                 server_version:   '5.6'
+            mysql:
+                driver: 'pdo_mysql'
+                charset: utf8mb4
+                default_table_options:
+                    charset: utf8mb4
+                    collate: utf8mb4_unicode_ci
+                dbname:           '%env(DATABASE_NAME)%'
+                user:             '%env(DATABASE_USER)%'
+                password:         '%env(DATABASE_PASSWORD)%'
+                host:             '%env(DATABASE_HOST)%'
+                server_version:   5.6
+            psql:
+                driver: 'pdo_pgsql'
+                dbname:           '%env(DATABASE_NAME)%'
+                user:             '%env(DATABASE_USER)%'
+                password:         '%env(DATABASE_PASSWORD)%'
+                host:             '%env(DATABASE_HOST)%'
+                server_version:   10.4
         #url: 'mysql://doctrine-blog:o14XCcp38Eq3MOSV@127.0.0.1:3306/blog'
 
     orm:
