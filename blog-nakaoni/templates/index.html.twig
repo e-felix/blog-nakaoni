@@ -131,7 +131,7 @@
 
     {# ------------JEUX VIDEO------------ #}
     <section class="categorieMenu">
-        <a href="{{ path('app_rubrique', {'categorie':'jeux'}) }}"><h2><i class="fas fa-gamepad"></i> {{ jeux[0].categorie|upper }}</h2></a>
+        <a href="{{ path('app_rubrique', {'categorie':'games'}) }}"><h2><i class="fas fa-gamepad"></i> {{ jeux[0].categorie|upper }}</h2></a>
         <article class="lastArticle card">
             <a href="{{ path('app_article', {'categorie':jeux[0].categorie, 'id':jeux[0].id, 'title':jeux[0].titre | replace({' ' : '-'}) | lower }) }}">
                 <img class="card-img" src="{{ asset('images/articles/' ~ jeux[0].imageName) }}" alt="{{ jeux[0].titre }}">

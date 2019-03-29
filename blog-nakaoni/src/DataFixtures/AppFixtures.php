@@ -1,17 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: stagiaire
- * Date: 26/06/2018
- * Time: 15:00
- */
 
 namespace App\DataFixtures;
 
-use App\Entity\Articles;
-use App\Entity\Utilisateurs;
+use App\Entity\Article;
+use App\Entity\Utilisateur;
+
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+
 use Symfony\Component\HttpFoundation\File\File;
 
 const TEST_IMAGE_PATH = 'public/images/articles/monimage.jpg';
@@ -32,16 +28,16 @@ class AppFixtures extends Fixture
 
         $date = new \DateTime('2018-06-26');
 
-        $user = new Utilisateurs();
+        $user = new Utilisateur();
         $user->setEmail('chotenro@gmail.com');
-        $user->setPassword('');
+        $user->setPlainPassword('nakaoni');
         $user->setUsername('Nakaoni');
         $user->setEnabled(1);
 
         for ($i = 0; $i < 10; $i++ )
         {
 
-            $article = new Articles();
+            $article = new Article();
             $article->setTitre('Titre '.$i);
             $article->setAuteur($user);
             $article->setAccroche('Look, just because I don\'t be givin\' no man a foot massage don\'t make it right for Marsellus to throw Antwone into a glass motherfuckin\' house, fuckin\' up the way the nigger talks');
@@ -70,7 +66,7 @@ class AppFixtures extends Fixture
         for ($i = 10; $i < 20; $i++ )
         {
 
-            $article = new Articles();
+            $article = new Article();
             $article->setTitre('Titre '.$i);
             $article->setAuteur($user);
             $article->setAccroche('Look, just because I don\'t be givin\' no man a foot massage don\'t make it right for Marsellus to throw Antwone into a glass motherfuckin\' house, fuckin\' up the way the nigger talks');
@@ -99,7 +95,7 @@ class AppFixtures extends Fixture
         for ($i = 20; $i < 30; $i++ )
         {
 
-            $article = new Articles();
+            $article = new Article();
             $article->setTitre('Titre '.$i);
             $article->setAuteur($user);
             $article->setAccroche('Look, just because I don\'t be givin\' no man a foot massage don\'t make it right for Marsellus to throw Antwone into a glass motherfuckin\' house, fuckin\' up the way the nigger talks');
@@ -129,7 +125,7 @@ class AppFixtures extends Fixture
         for ($i = 30; $i < 40; $i++ )
         {
 
-            $article = new Articles();
+            $article = new Article();
             $article->setTitre('Titre '.$i);
             $article->setAuteur($user);
             $article->setAccroche('Look, just because I don\'t be givin\' no man a foot massage don\'t make it right for Marsellus to throw Antwone into a glass motherfuckin\' house, fuckin\' up the way the nigger talks');

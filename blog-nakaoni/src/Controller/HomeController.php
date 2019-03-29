@@ -1,24 +1,19 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: stagiaire
- * Date: 25/06/2018
- * Time: 14:56
- */
 
 namespace App\Controller;
 
 
-use App\Entity\Articles;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\Entity\Article;
+
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * Class HomeController
  * @package App\Controller
  */
-class HomeController extends Controller
+class HomeController extends AbstractController
 {
     /**
      * HomePage
@@ -26,23 +21,37 @@ class HomeController extends Controller
      */
     public function index(): Response
     {
-        //Récupérations de 3 articles par catégorie
-        $repository = $this->getDoctrine()->getRepository(Articles::class);
-        $films = $repository->findXByCategorie('films', 3);
-        $series = $repository->findXByCategorie('series', 3);
-        $mangas = $repository->findXByCategorie('mangas', 3);
-        $jeux = $repository->findXByCategorie('games', 3);
+        $repository = $this->getDoctrine()->getRepository(Article::class);
+        $rndArticles = $repository->findBy(
+            array("public" => true),
+            array("nbViews" => "DESC"),
+            3
+        );
 
-        //Récupérations des 3 articles avec le plus de vues toutes catégories confondues
-        $rndArticles = $repository->findByNbViews();
+        $films = $repository->findXByCategorie("films", 3);
+        $series = $repository->findXByCategorie("series", 3);
+        $mangas = $repository->findXByCategorie("mangas", 3);
+        $jeux = $repository->findXByCategorie("games", 3);
 
+        return $this->render(
+            "index.html.twig",
+            array(
+                "films" => $films,
+                "series" => $series,
+                "mangas" => $mangas,
+                "jeux" => $jeux,
+                "rndArticles" => $rndArticles
+            )
+        );
+    }
 
-        return $this->render('index.html.twig', [
-            'films' => $films,
-            'series' => $series,
-            'mangas' => $mangas,
-            'jeux' => $jeux,
-            'rndArticles' => $rndArticles
-        ]);
+    /**
+     * @Route("/admin", name="app_admin")
+     *
+     * @return Response
+     */
+    public function indexAdmin(): Response
+    {
+        return $this->render("admin/index.html.twig");
     }
 }

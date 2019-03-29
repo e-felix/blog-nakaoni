@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CommentairesRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CommentaireRepository")
  */
-class Commentaires
+class Commentaire
 {
     /**
      * @ORM\Id()
@@ -29,22 +29,34 @@ class Commentaires
     private $statut;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Utilisateurs", inversedBy="commentaires")
+     * @ORM\ManyToOne(
+     *     targetEntity="App\Entity\Utilisateurs",
+     *     inversedBy="commentaires"
+     * )
      */
     private $utilisateurs;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Articles", inversedBy="commentaires")
+     * @ORM\ManyToOne(
+     *     targetEntity="App\Entity\Article",
+     *     inversedBy="commentaires"
+     * )
      */
-    private $articles;
+    private $article;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Commentaires", inversedBy="mesCommentaires")
+     * @ORM\ManyToOne(
+     *     targetEntity="App\Entity\Commentaire",
+     *     inversedBy="mesCommentaires"
+     * )
      */
     private $referent;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Commentaires", mappedBy="referent")
+     * @ORM\OneToMany(
+     *     targetEntity="App\Entity\Commentaire",
+     *     mappedBy="referent"
+     * )
      */
     private $mesCommentaires;
 
@@ -99,14 +111,14 @@ class Commentaires
         return $this;
     }
 
-    public function getArticles(): ?Articles
+    public function getArticle(): ?Article
     {
-        return $this->articles;
+        return $this->article;
     }
 
-    public function setArticles(?Articles $articles): self
+    public function setArticle(?Article $article): self
     {
-        $this->articles = $articles;
+        $this->article = $article;
 
         return $this;
     }
@@ -124,14 +136,14 @@ class Commentaires
     }
 
     /**
-     * @return Collection|Commentaires[]
+     * @return Collection|Commentaire[]
      */
     public function getMesCommentaires(): Collection
     {
         return $this->mesCommentaires;
     }
 
-    public function addMesCommentaire(Commentaires $mesCommentaire): self
+    public function addMesCommentaire(Commentaire $mesCommentaire): self
     {
         if (!$this->mesCommentaires->contains($mesCommentaire)) {
             $this->mesCommentaires[] = $mesCommentaire;
@@ -141,11 +153,11 @@ class Commentaires
         return $this;
     }
 
-    public function removeMesCommentaire(Commentaires $mesCommentaire): self
+    public function removeMesCommentaire(Commentaire $mesCommentaire): self
     {
         if ($this->mesCommentaires->contains($mesCommentaire)) {
             $this->mesCommentaires->removeElement($mesCommentaire);
-            // set the owning side to null (unless already changed)
+
             if ($mesCommentaire->getMesCommentaires() === $this) {
                 $mesCommentaire->setReferent(null);
             }

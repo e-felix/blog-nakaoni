@@ -6,6 +6,7 @@ fos_user:
     service:
         mailer: fos_user.mailer.twig_swift
     from_email:
+        # change to env variables
         address: contact@nakaoni.com
         sender_name: Contact
     registration:
