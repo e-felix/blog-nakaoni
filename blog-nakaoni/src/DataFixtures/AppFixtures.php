@@ -33,6 +33,7 @@ class AppFixtures extends Fixture
         $user->setPlainPassword('nakaoni');
         $user->setUsername('Nakaoni');
         $user->setEnabled(1);
+        $user->setRoles(["ROLE_ADMIN"]);
 
         for ($i = 0; $i < 10; $i++ )
         {

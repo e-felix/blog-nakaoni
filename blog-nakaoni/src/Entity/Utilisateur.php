@@ -25,7 +25,7 @@ class Utilisateur extends User
     private $articles;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="utilisateurs")
+     * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="utilisateur")
      */
     private $commentaires;
 

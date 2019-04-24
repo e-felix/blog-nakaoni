@@ -2,8 +2,6 @@
 
     namespace App\Controller\Traits;
 
-    use Doctrine\ORM\EntityManagerInterface;
-
     /**
      * Créer ici toutes les fonctions qui ne sont pas expressément liées à un controller
      */

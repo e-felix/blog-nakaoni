@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Commentaire;
 use App\Form\CommentaireType;
@@ -16,6 +16,8 @@ use Knp\Component\Pager\PaginatorInterface;
 
 class CommentaireController extends AbstractController
 {
+    CONST COMMENTAIRES_PER_PAGE = 50;
+
     /**
      * @param EntityManagerInterface $entityManager
      * @param PaginatorInterface $paginator
@@ -30,8 +32,6 @@ class CommentaireController extends AbstractController
 
         $this->paginator = $paginator;
     }
-
-    /*--- ADMINISTRATION ---*/
 
     /**
      * @Route(
@@ -49,7 +49,7 @@ class CommentaireController extends AbstractController
         $pagination = $this->paginator->paginate(
             $commentaires,
             $request->query->getInt("page", 1),
-            50
+            self::COMMENTAIRES_PER_PAGE
         );
 
         return $this->render(
@@ -144,7 +144,7 @@ class CommentaireController extends AbstractController
      * @param Commentaire $commentaire
      * @return Response
      */
-    public function removeUser(Commentaire $commentaire): Response
+    public function removeCommentaire(Commentaire $commentaire): Response
     {
         $this->entityManager->remove($commentaire);
         $this->entityManager->flush();

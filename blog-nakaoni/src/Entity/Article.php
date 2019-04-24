@@ -15,6 +15,11 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  */
 class Article
 {
+    CONST FILMS_CATEGORY = "films";
+    CONST SERIES_CATEGORY = "series";
+    CONST MANGAS_CATEGORY = "mangas";
+    CONST GAMES_CATEGORY = "games";
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -38,7 +43,7 @@ class Article
     private $texte;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Utilisateurs", inversedBy="articles", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Utilisateur", inversedBy="articles", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $auteur;
@@ -179,11 +184,9 @@ class Article
         return $this->titre;
     }
 
-    public function setTitre(string $titre): self
+    public function setTitre(string $titre)
     {
         $this->titre = $titre;
-
-        return $this;
     }
 
     public function getAccroche(): ?string
@@ -191,11 +194,9 @@ class Article
         return $this->accroche;
     }
 
-    public function setAccroche(string $accroche): self
+    public function setAccroche(string $accroche)
     {
         $this->accroche = $accroche;
-
-        return $this;
     }
 
     public function getTexte(): ?string
@@ -203,23 +204,19 @@ class Article
         return $this->texte;
     }
 
-    public function setTexte(string $texte): self
+    public function setTexte(string $texte)
     {
         $this->texte = $texte;
-
-        return $this;
     }
 
-    public function getAuteur(): ?Utilisateurs
+    public function getAuteur(): ?Utilisateur
     {
         return $this->auteur;
     }
 
-    public function setAuteur(?Utilisateurs $auteur): self
+    public function setAuteur(?Utilisateur $auteur)
     {
         $this->auteur = $auteur;
-
-        return $this;
     }
 
     public function getCategorie(): ?string
@@ -227,11 +224,9 @@ class Article
         return $this->categorie;
     }
 
-    public function setCategorie(string $categorie): self
+    public function setCategorie(string $categorie)
     {
         $this->categorie = $categorie;
-
-        return $this;
     }
 
     public function getYoutube(): ?string
@@ -239,11 +234,9 @@ class Article
         return $this->youtube;
     }
 
-    public function setYoutube(?string $youtube): self
+    public function setYoutube(?string $youtube)
     {
         $this->youtube = $youtube;
-
-        return $this;
     }
 
     public function getPublic(): ?int
@@ -251,11 +244,9 @@ class Article
         return $this->public;
     }
 
-    public function setPublic(int $public): self
+    public function setPublic(int $public)
     {
         $this->public = $public;
-
-        return $this;
     }
 
     public function getNbViews(): ?int
@@ -263,11 +254,9 @@ class Article
         return $this->nbViews;
     }
 
-    public function setNbViews(int $nbViews): self
+    public function setNbViews(int $nbViews)
     {
         $this->nbViews = $nbViews;
-
-        return $this;
     }
 
     public function getliked(): ?int
@@ -275,11 +264,9 @@ class Article
         return $this->liked;
     }
 
-    public function setliked(?int $liked): self
+    public function setliked(?int $liked)
     {
         $this->liked = $liked;
-
-        return $this;
     }
 
     public function getdisliked(): ?int
@@ -287,11 +274,9 @@ class Article
         return $this->disliked;
     }
 
-    public function setdisliked(?int $disliked): self
+    public function setdisliked(?int $disliked)
     {
         $this->disliked = $disliked;
-
-        return $this;
     }
 
     public function getCommentEnabled(): ?bool
@@ -299,11 +284,9 @@ class Article
         return $this->commentEnabled;
     }
 
-    public function setCommentEnabled(bool $commentEnabled): self
+    public function setCommentEnabled(bool $commentEnabled)
     {
         $this->commentEnabled = $commentEnabled;
-
-        return $this;
     }
 
     public function getCreatedAt(): ?\DateTimeInterface
@@ -311,11 +294,9 @@ class Article
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(\DateTimeInterface $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     public function getUpdatedAt(): ?\DateTimeInterface
@@ -323,11 +304,9 @@ class Article
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**
@@ -338,17 +317,15 @@ class Article
         return $this->commentaires;
     }
 
-    public function addCommentaire(Commentaire $commentaire): self
+    public function addCommentaire(Commentaire $commentaire)
     {
         if (!$this->commentaires->contains($commentaire)) {
             $this->commentaires[] = $commentaire;
             $commentaire->setArticle($this);
         }
-
-        return $this;
     }
 
-    public function removeCommentaire(Commentaire $commentaire): self
+    public function removeCommentaire(Commentaire $commentaire)
     {
         if ($this->commentaires->contains($commentaire)) {
             $this->commentaires->removeElement($commentaire);
@@ -357,8 +334,6 @@ class Article
                 $commentaire->setArticle(null);
             }
         }
-
-        return $this;
     }
 
 }

@@ -7,7 +7,7 @@
     <div class="jumbotron">
         <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
         {% if targetUrl %}
-            <p><a class="btn btn-primary" href="{# targetUrl #}{{ path('app_home_index') }}">{# 'registration.back'|trans #}Retour à l'accueil</a></p>
+            <p><a class="btn btn-primary" href="{# targetUrl #}{{ path('app_front_home_index') }}">{# 'registration.back'|trans #}Retour à l'accueil</a></p>
         {% endif %}
     </div>
 {% endblock fos_user_content %}

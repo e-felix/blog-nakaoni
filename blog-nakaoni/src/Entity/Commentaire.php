@@ -30,11 +30,11 @@ class Commentaire
 
     /**
      * @ORM\ManyToOne(
-     *     targetEntity="App\Entity\Utilisateurs",
+     *     targetEntity="App\Entity\Utilisateur",
      *     inversedBy="commentaires"
      * )
      */
-    private $utilisateurs;
+    private $utilisateur;
 
     /**
      * @ORM\ManyToOne(
@@ -80,11 +80,9 @@ class Commentaire
         return $this->texte;
     }
 
-    public function setTexte(string $texte): self
+    public function setTexte(string $texte)
     {
         $this->texte = $texte;
-
-        return $this;
     }
 
     public function getStatut(): ?bool
@@ -92,11 +90,9 @@ class Commentaire
         return $this->statut;
     }
 
-    public function setStatut(bool $statut): self
+    public function setStatut(bool $statut)
     {
         $this->statut = $statut;
-
-        return $this;
     }
 
     public function getUtilisateurs(): ?Utilisateurs
@@ -104,11 +100,9 @@ class Commentaire
         return $this->utilisateurs;
     }
 
-    public function setUtilisateurs(?Utilisateurs $utilisateurs): self
+    public function setUtilisateurs(?Utilisateurs $utilisateurs)
     {
         $this->utilisateurs = $utilisateurs;
-
-        return $this;
     }
 
     public function getArticle(): ?Article
@@ -116,11 +110,9 @@ class Commentaire
         return $this->article;
     }
 
-    public function setArticle(?Article $article): self
+    public function setArticle(?Article $article)
     {
         $this->article = $article;
-
-        return $this;
     }
 
     public function getReferent(): ?self
@@ -128,11 +120,9 @@ class Commentaire
         return $this->referent;
     }
 
-    public function setReferent(?self $referent): self
+    public function setReferent(?self $referent)
     {
         $this->referent = $referent;
-
-        return $this;
     }
 
     /**
@@ -143,17 +133,15 @@ class Commentaire
         return $this->mesCommentaires;
     }
 
-    public function addMesCommentaire(Commentaire $mesCommentaire): self
+    public function addMesCommentaire(Commentaire $mesCommentaire)
     {
         if (!$this->mesCommentaires->contains($mesCommentaire)) {
             $this->mesCommentaires[] = $mesCommentaire;
             $mesCommentaire->setReferent($this);
         }
-
-        return $this;
     }
 
-    public function removeMesCommentaire(Commentaire $mesCommentaire): self
+    public function removeMesCommentaire(Commentaire $mesCommentaire)
     {
         if ($this->mesCommentaires->contains($mesCommentaire)) {
             $this->mesCommentaires->removeElement($mesCommentaire);
@@ -162,8 +150,6 @@ class Commentaire
                 $mesCommentaire->setReferent(null);
             }
         }
-
-        return $this;
     }
 
     public function getCreatedAt(): ?\DateTimeInterface
@@ -171,10 +157,8 @@ class Commentaire
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(\DateTimeInterface $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 
 use App\Entity\Article;
@@ -20,6 +20,8 @@ use Knp\Component\Pager\PaginatorInterface;
 
 class UtilisateurController extends AbstractController
 {
+    CONST USERS_PER_PAGE = 50;
+
     /**
      * @param EntityManagerInterface $entityManager
      * @param PaginatorInterface $paginator
@@ -36,49 +38,6 @@ class UtilisateurController extends AbstractController
         $this->repository = $this->entityManager->getRepository(Utilisateur::class);
 
         $this->paginator = $paginator;
-    }
-
-    /*--- FRONT ---*/
-
-    /**
-     * Affiche les articles d'un auteur
-     * @Route(
-     *     "/utilisateur/{id}-{username}/articles",
-     *     name="app_user",
-     *     requirements={"id":"\d+"}
-     * )
-     *
-     * @param int $id
-     * @param Request $request
-     */
-    public function index(
-        Utilisateur $user,
-        Request $request
-    ): Response
-    {
-        //##todo: Récupère le profil d'un utilisateur
-
-        //##todo: Récupère les commentaires d'un utilisateurs
-
-        //##todo: Limiter la recherche aux auteurs (Affiche les articles seulement si c'est un auteur)
-        $repositoryArticles = $this->getDoctrine()->getRepository(Article::class);
-
-        $userArticles = $repositoryArticles->findAllArticlesByUserQuery($user);
-        $userBestArticles = $repositoryArticles->find3BestArticlesByUser($user);
-
-        $paginationArticles = $this->paginator->paginate(
-            $userArticles,
-            $request->query->getInt("page", 1),
-            6
-        );
-
-        return $this->render(
-            "utilisateurs/index.html.twig",
-            array(
-                "paginationArticles" => $paginationArticles,
-                "userArticlesBest" => $userBestArticles
-            )
-        );
     }
 
     /*--- ADMINISTRATION ---*/
@@ -98,7 +57,7 @@ class UtilisateurController extends AbstractController
         $pagination = $this->paginator->paginate(
             $users,
             $request->query->getInt("page", 1),
-            50
+            self::USERS_PER_PAGE
         );
 
         return $this->render(

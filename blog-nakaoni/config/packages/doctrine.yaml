@@ -5,17 +5,6 @@ doctrine:
         default_connection: mysql
         connections:
             nakaoni:
-                # Change to env variables
-                driver: 'pdo_mysql'
-                charset: utf8mb4
-                default_table_options:
-                    charset: utf8mb4
-                    collate: utf8mb4_unicode_ci
-                dbname:           nakaonicdpadmin
-                user:             nakaonicdpadmin
-                password:         Raptors0308
-                host:             nakaonicdpadmin.mysql.db
-                server_version:   5.6
             mysql:
                 driver: 'pdo_mysql'
                 charset: utf8mb4
