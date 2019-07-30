@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CommentairesRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CommentaireRepository")
  */
-class Commentaires
+class Commentaire
 {
     /**
      * @ORM\Id()
@@ -29,22 +29,34 @@ class Commentaires
     private $statut;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Utilisateurs", inversedBy="commentaires")
+     * @ORM\ManyToOne(
+     *     targetEntity="App\Entity\Utilisateur",
+     *     inversedBy="commentaires"
+     * )
      */
-    private $utilisateurs;
+    private $utilisateur;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Articles", inversedBy="commentaires")
+     * @ORM\ManyToOne(
+     *     targetEntity="App\Entity\Article",
+     *     inversedBy="commentaires"
+     * )
      */
-    private $articles;
+    private $article;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Commentaires", inversedBy="mesCommentaires")
+     * @ORM\ManyToOne(
+     *     targetEntity="App\Entity\Commentaire",
+     *     inversedBy="mesCommentaires"
+     * )
      */
     private $referent;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Commentaires", mappedBy="referent")
+     * @ORM\OneToMany(
+     *     targetEntity="App\Entity\Commentaire",
+     *     mappedBy="referent"
+     * )
      */
     private $mesCommentaires;
 
@@ -68,11 +80,9 @@ class Commentaires
         return $this->texte;
     }
 
-    public function setTexte(string $texte): self
+    public function setTexte(string $texte)
     {
         $this->texte = $texte;
-
-        return $this;
     }
 
     public function getStatut(): ?bool
@@ -80,11 +90,9 @@ class Commentaires
         return $this->statut;
     }
 
-    public function setStatut(bool $statut): self
+    public function setStatut(bool $statut)
     {
         $this->statut = $statut;
-
-        return $this;
     }
 
     public function getUtilisateurs(): ?Utilisateurs
@@ -92,23 +100,19 @@ class Commentaires
         return $this->utilisateurs;
     }
 
-    public function setUtilisateurs(?Utilisateurs $utilisateurs): self
+    public function setUtilisateurs(?Utilisateurs $utilisateurs)
     {
         $this->utilisateurs = $utilisateurs;
-
-        return $this;
     }
 
-    public function getArticles(): ?Articles
+    public function getArticle(): ?Article
     {
-        return $this->articles;
+        return $this->article;
     }
 
-    public function setArticles(?Articles $articles): self
+    public function setArticle(?Article $article)
     {
-        $this->articles = $articles;
-
-        return $this;
+        $this->article = $article;
     }
 
     public function getReferent(): ?self
@@ -116,42 +120,36 @@ class Commentaires
         return $this->referent;
     }
 
-    public function setReferent(?self $referent): self
+    public function setReferent(?self $referent)
     {
         $this->referent = $referent;
-
-        return $this;
     }
 
     /**
-     * @return Collection|Commentaires[]
+     * @return Collection|Commentaire[]
      */
     public function getMesCommentaires(): Collection
     {
         return $this->mesCommentaires;
     }
 
-    public function addMesCommentaire(Commentaires $mesCommentaire): self
+    public function addMesCommentaire(Commentaire $mesCommentaire)
     {
         if (!$this->mesCommentaires->contains($mesCommentaire)) {
             $this->mesCommentaires[] = $mesCommentaire;
             $mesCommentaire->setReferent($this);
         }
-
-        return $this;
     }
 
-    public function removeMesCommentaire(Commentaires $mesCommentaire): self
+    public function removeMesCommentaire(Commentaire $mesCommentaire)
     {
         if ($this->mesCommentaires->contains($mesCommentaire)) {
             $this->mesCommentaires->removeElement($mesCommentaire);
-            // set the owning side to null (unless already changed)
+
             if ($mesCommentaire->getMesCommentaires() === $this) {
                 $mesCommentaire->setReferent(null);
             }
         }
-
-        return $this;
     }
 
     public function getCreatedAt(): ?\DateTimeInterface
@@ -159,10 +157,8 @@ class Commentaires
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(\DateTimeInterface $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 }

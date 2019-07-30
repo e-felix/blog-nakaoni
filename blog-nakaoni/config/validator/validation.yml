@@ -13,6 +13,7 @@ App\Entity\Utilisateurs:
           mode: html5
           checkMX: true
           message: "Email {{ value }} non valide"
+          
 App\Entity\Articles:
   properties:
     titre:

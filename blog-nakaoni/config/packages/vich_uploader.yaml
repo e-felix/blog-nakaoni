@@ -1,3 +1,4 @@
+# TODO remove bundle to do your own
 vich_uploader:
     db_driver: orm
 

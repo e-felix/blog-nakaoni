@@ -1,4 +1,5 @@
 framework:
+    # TODO change to env variable
     default_locale: '%locale%'
     translator:
         paths:

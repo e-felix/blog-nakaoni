@@ -1,14 +1,17 @@
 security:
     encoders:
         FOS\UserBundle\Model\UserInterface: bcrypt
+        
     role_hierarchy:
         ROLE_ABONNE: ROLE_USER
         ROLE_MODERATEUR: ROLE_ABONNE
         ROLE_AUTEUR: ROLE_MODERATEUR
         ROLE_ADMIN: ROLE_AUTEUR
+
     providers:
         fos_userbundle:
             id: fos_user.user_provider.username
+
     firewalls:
         main:
             pattern: ^/
@@ -17,6 +20,7 @@ security:
                 csrf_token_generator: security.csrf.token_manager
             logout: true
             anonymous: true
+
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }

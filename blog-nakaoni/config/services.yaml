@@ -1,3 +1,4 @@
+# TODO: refactor all in env var
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
@@ -6,8 +7,8 @@ parameters:
     mailer_encryption: tls
     mailer_port: 587
     mailer_host: ssl0.ovh.net
-    mailer_user: contact@nakaoni.com
-    mailer_password: Raptors0308
+    mailer_user: '%env(mailer_user)%'
+    mailer_password: '%env(mailer_password)%'
 
 services:
     # default configuration for services in *this* file

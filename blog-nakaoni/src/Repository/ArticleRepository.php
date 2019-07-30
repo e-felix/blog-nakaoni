@@ -2,27 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Articles;
+use App\Entity\Article;
+use App\Entity\Utilisateur;
+
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
+
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Articles|null find($id, $lockMode = null, $lockVersion = null)
- * @method Articles|null findOneBy(array $criteria, array $orderBy = null)
- * @method Articles[]    findAll()
- * @method Articles[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
  */
-class ArticlesRepository extends ServiceEntityRepository
+class ArticleRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Articles::class);
+        parent::__construct($registry, Article::class);
     }
 
     /**
      * Récupère la requête de tous les éléments
-     * @return Query
      */
     public function findAllByOrderQuery(): Query
     {
@@ -33,26 +32,23 @@ class ArticlesRepository extends ServiceEntityRepository
 
     /**
      * Récupère tous les articles d'une catégorie donnée
+     *
      * @param $categorie
-     * @return Query
      */
     public function findByCategorieQuery($categorie): Query
     {
-        //retourne la requête SQL pour le paginator
         return $query = $this->createQueryBuilder('a')
             ->where('a.categorie = :cat')
             ->setParameter('cat', $categorie)
             ->andWhere('a.public = true')
             ->orderBy('a.createdAt', 'DESC')
             ->getQuery();
-
     }
 
     /**
      * Récupère X articles d'une catégorie donnée
      * @param $categorie
      * @param $x
-     * @return \Doctrine\ORM\Query
      */
     public function findXByCategorie($categorie, $x)
     {
@@ -62,20 +58,6 @@ class ArticlesRepository extends ServiceEntityRepository
             ->andWhere('a.public = true')
             ->orderBy('a.createdAt', 'DESC')
             ->setMaxResults($x)
-            ->getQuery();
-
-        return $query->getResult();
-    }
-
-    /**
-     * Récupère les 3 premiers articles avec le plus grand nombre de vues
-     * @return mixed
-     */
-    public function findByNbViews()
-    {
-        $query = $this->createQueryBuilder('a')
-            ->orderBy('a.nbViews', 'DESC')
-            ->setMaxResults('3')
             ->getQuery();
 
         return $query->getResult();
@@ -120,16 +102,14 @@ class ArticlesRepository extends ServiceEntityRepository
 
     /**
      * Retourne requête de la liste des articles d'un auteur pour knp_paginator
-     * @param $id
-     * @return Query
+     *
+     * @param Utilisateur $user
      */
-    public function findAllArticlesByUserQuery($id): Query
+    public function findAllArticlesByUserQuery(Utilisateur $user): Query
     {
         return $query = $this->createQueryBuilder('a')
-            ->join('a.auteur', 'u')
-            ->addSelect('u')
-            ->where('u.id = :id')
-            ->setParameter('id', $id)
+            ->where('a.auteur = :user')
+            ->setParameter('user', $user)
             ->andWhere('a.public = true')
             ->orderBy('a.id', 'DESC')
             ->getQuery();
@@ -137,16 +117,14 @@ class ArticlesRepository extends ServiceEntityRepository
 
     /**
      * Retourne les 3 articles les plus vus d'un auteur
-     * @param $id
+     * @param Utilisateur $user
      * @return mixed
      */
-    public function find3BestArticlesByUser($id)
+    public function find3BestArticlesByUser(Utilisateur $user)
     {
         $query = $this->createQueryBuilder('a')
-            ->join('a.auteur', 'u')
-            ->addSelect('u')
-            ->where('u.id = :id')
-            ->setParameter('id', $id)
+            ->where('a.auteur = :user')
+            ->setParameter('user', $id)
             ->andWhere('a.public = true')
             ->orderBy('a.nbViews', 'DESC')
             ->setMaxResults(3)

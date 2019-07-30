@@ -8,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UtilisateursRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
  */
-class Utilisateurs extends User
+class Utilisateur extends User
 {
     /**
      * @ORM\Id()
@@ -20,12 +20,12 @@ class Utilisateurs extends User
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Articles", mappedBy="auteur")
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="auteur")
      */
     private $articles;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Commentaires", mappedBy="utilisateurs")
+     * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="utilisateur")
      */
     private $commentaires;
 
@@ -42,14 +42,14 @@ class Utilisateurs extends User
     }
 
     /**
-     * @return Collection|Articles[]
+     * @return Collection|Article[]
      */
     public function getArticles(): Collection
     {
         return $this->articles;
     }
 
-    public function addArticle(Articles $article): self
+    public function addArticle(Article $article): self
     {
         if (!$this->articles->contains($article)) {
             $this->articles[] = $article;
@@ -59,7 +59,7 @@ class Utilisateurs extends User
         return $this;
     }
 
-    public function removeArticle(Articles $article): self
+    public function removeArticle(Article $article): self
     {
         if ($this->articles->contains($article)) {
             $this->articles->removeElement($article);
@@ -73,14 +73,14 @@ class Utilisateurs extends User
     }
 
     /**
-     * @return Collection|Commentaires[]
+     * @return Collection|Commentaire[]
      */
     public function getCommentaires(): Collection
     {
         return $this->commentaires;
     }
 
-    public function addCommentaire(Commentaires $commentaire): self
+    public function addCommentaire(Commentaire $commentaire): self
     {
         if (!$this->commentaires->contains($commentaire)) {
             $this->commentaires[] = $commentaire;
@@ -90,7 +90,7 @@ class Utilisateurs extends User
         return $this;
     }
 
-    public function removeCommentaire(Commentaires $commentaire): self
+    public function removeCommentaire(Commentaire $commentaire): self
     {
         if ($this->commentaires->contains($commentaire)) {
             $this->commentaires->removeElement($commentaire);
