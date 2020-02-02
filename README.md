@@ -1,4 +1,4 @@
-# Tell My City
+# Blog
 
 ## Table of contents
  * [Run the project](#run-the-project)
