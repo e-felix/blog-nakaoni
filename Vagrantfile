@@ -59,7 +59,7 @@ Vagrant.configure(2) do |config|
     installs.inline = "
 
       apt-get update
-      apt-get install php-mbstring php-zip zip mysql-server php7.2-mysql htop php-xdebug -y
+      apt-get install php-mbstring php-zip zip mysql-server php7.2-mysql htop php-xdebug wget -y
 
       cd /vagrant/blog-nakaoni
       curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
@@ -69,6 +69,9 @@ Vagrant.configure(2) do |config|
       chown vagrant:vagrant /var/lib/php/sessions -R
 
       echo 'cd /vagrant/blog-nakaoni' >> /home/vagrant/.zshrc
+
+      wget https://get.symfony.com/cli/installer -O - | bash
+      mv /home/vagrant/.symfony/bin/symfony /usr/local/bin/symfony
 
       echo 'Done.'
     "
